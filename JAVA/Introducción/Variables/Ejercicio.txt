@@ -1,0 +1,17 @@
+-- 1 Pedir nombre por teclado y hacer que te salude:
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+       
+        Scanner sn = new Scanner(System.in);
+        sn.useDelimiter("\n");
+    
+       System.out.println("Introduce un nombre por teclado");
+       String Nombre = sn.next();
+       
+       System.out.println("¡Hola " + Nombre + "!");
+      
+    }
+}
+

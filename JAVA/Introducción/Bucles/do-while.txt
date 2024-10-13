@@ -1,0 +1,28 @@
+-- 1 Ejercicio con bucle do-while que se repite, mientras no se introduzca un numero positivo:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+    // Declaración de variables:
+    int numero;
+      
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");    
+       
+   numero = 0;
+   
+    do {
+       System.out.println("Introduce un número por teclado:");
+       numero = sn.nextInt();
+       
+       if (numero < 0) {
+           System.out.println("Debe de intoducir un número positivo para salir del bucle.");
+       }
+          
+       } while (numero < 0);
+              
+}
+}
+

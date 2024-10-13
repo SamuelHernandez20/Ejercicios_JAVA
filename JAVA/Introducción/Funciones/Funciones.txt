@@ -1,0 +1,166 @@
+-- 1 Ejemplo de uso de las funciones en Java:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+    // Declaración de las variables:
+    
+     int operando1;
+     int operando2;
+     int numero;
+       
+    // La declaración de las funciones se suele realizar fuera del "main".
+    
+    
+    // Inicialización de las variables:
+    
+    operando1 = 5;
+    operando2 = 10;
+    numero = 3;
+    
+    // llamada a las funciones:
+    
+    saludar ("Samuel");
+    
+    suma(operando1, operando2);
+    System.out.println("El resultado de es: " + suma(operando1, operando2));
+    
+   
+    if (es_par(numero)) {
+    System.out.println("El número es par.");
+    }
+    System.out.println("El número es impar.");
+    
+   }
+   
+
+ 
+   // Declarar una función (void) que no retorna ningún valor:
+    public static void saludar (String nombre) {
+    System.out.println("Hola " + nombre + "!");
+   }
+    
+    // Declarar una función (int) que retorna un valor entero:
+    public static int suma (int operando1, int operando2) {
+    return operando1 + operando2;
+   }
+    
+    // Declarar una función (boolean) que retorna un valor booleano:
+    public static boolean es_par (int numero) {
+    return numero % 2 == 0;
+   }
+   
+}
+
+
+-- 2 Calcular el factorial de un número dado empleando una función
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   // Delcaración de variables:
+   
+   int numero;
+  
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   System.out.println("Introduce un número y se calculará su factorial:");
+   numero = sn.nextInt();
+   
+   // Impresión del resultado de la función "Calcular_factorial":
+   
+    System.out.println("El Factorial de " + numero + " es: " + Calcular_factorial(numero));
+   
+   }
+  
+    // Declarar una función (int) para calcular el factorial de un número dado:
+    public static int Calcular_factorial (int numero) {
+  
+     for (int i = numero-1; i > 0; i--) {
+         numero *= i; 
+     }
+
+     return numero;
+   }
+    
+
+-- 3 Generar un número aleatorio dado 2 parámetros en una función:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   // Declaración de variables:
+   
+   int parametro1;
+   int parametro2;
+   
+   // Incialización de las variables:
+   
+   parametro1 = 1;
+   parametro2 = 101;
+
+   // Impresión del resultado de la función "Random_function":
+   
+    System.out.println( "El número aleatorio es: " + Random_function(parametro1, parametro2));
+   
+   }
+  
+   // Declarar una función (int) para generar un número aleatorio:
+    
+  public static int Random_function (int parametro1, int parametro2) {
+  
+      Random random = new Random();
+      int numero_aleatorio = random.nextInt(parametro1, parametro2);
+     
+      return numero_aleatorio;
+   }
+
+}
+
+-- 4 Función para generar una contraseña :
+
+
+public static String password_function (int longitud){
+  
+       // Declaracion de variables:
+       String String_password = "";
+       char caracter_password = 0;
+       int numero_aleatorio;
+       int i;
+       
+       for (i = 0; i < longitud; i++) {
+           
+         Random random = new Random();
+         numero_aleatorio = random.nextInt(1, 4);   
+           
+      switch (numero_aleatorio) {
+  
+        case 1:
+             caracter_password = (char) random.nextInt('A', 'Z');
+             break;
+        case 2:
+             caracter_password = (char) random.nextInt('a', 'z');
+             break;
+       case 3:
+            caracter_password =  (char) random.nextInt('0', '9');
+            break;
+       case 4:
+            caracter_password =  (char) random.nextInt('!', '&');
+         break;
+     
+  }
+          String_password += caracter_password;
+       }
+       
+      return String_password;
+   }
+
+
+    
+   
+}

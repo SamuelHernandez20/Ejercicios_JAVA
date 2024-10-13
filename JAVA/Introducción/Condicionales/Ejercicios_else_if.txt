@@ -1,0 +1,75 @@
+-- 1 Sintaxis de escritura del elseif en Java:
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+      
+    // Número a comprobar:
+    
+    int numero = 51;
+    
+  if (numero < 0) {
+      System.out.println("El número es negativo");
+    } else if (numero > 0 && numero <= 10) {
+      System.out.println("El número esta entre 1 y 10"); 
+      
+    } else if (numero > 10 && numero <= 50) {
+      System.out.println("El número esta entre 11 y 50");    
+    } 
+    else {
+      System.out.println("El número es mayor que 50"); 
+    }
+}
+ 
+}
+
+-- 2
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+   
+  // Petición de 3 número por teclado:
+ 
+  System.out.println("Introduce un primer número por teclado");
+  int num1 = sn.nextInt();
+  
+  System.out.println("Introduce un segundo número por teclado");
+  int num2 = sn.nextInt();
+  
+  System.out.println("Introduce un tercer número por teclado");
+  int num3 = sn.nextInt();
+  
+  // Constantes que devuelven TRUE o FALSE dependiendo del resultado de las operaciones:
+  
+  final boolean NUM1_ES_MAYOR = num1 > num2 && num1 > num3;
+  final boolean NUM2_ES_MAYOR = num2 > num1 && num2 > num3;
+
+  // Constantes que devuelven TRUE o FALSE dependiendo de si todos los números son iguales, o como mínimo 2 de ellos:
+  
+  final boolean EQUIPOTENCIA = num1 == num2 || num1 == num3 || num2 == num3;
+  
+  
+     if (NUM1_ES_MAYOR) {
+      System.out.println("El número mayor es: " + num1);
+       
+    } else if (NUM2_ES_MAYOR) {
+      System.out.println("El número mayor es: " + num2);
+ 
+    }
+    else if (EQUIPOTENCIA) {
+      System.out.println("Todos los números son iguales.");
+      
+    } 
+    else {
+      System.out.println("El número mayor es: " + num3);
+    }
+     
+  // Cerrar el escáner para liberar recursos:
+  sn.close(); 
+}
+ 
+}

@@ -1,0 +1,66 @@
+-- 1 Sintaxis básica del bucle for:
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+    
+    // Recomendado para usarlo en rangos definidos:
+    
+    for (int i = 1; i <= 10; i++){
+        System.out.println("Valor del contador: " + i);
+    }
+}
+} 
+
+-- 2 Mostrar los números del 1 al 100 que sean divisibles entre 2 y 3.
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+    // Declaración de la variable para la condición:
+    
+    boolean divisible_2_y_3;
+    
+    System.out.println("Valores del 1 al 100 que son divisibles entre 2 y 3:");
+    System.out.println("");
+    
+    for (int contador = 1; contador <= 100; contador++){
+    divisible_2_y_3 = contador % 2 == 0 && contador % 3 == 0;
+      
+    if (divisible_2_y_3){
+     System.out.println(" |      " + contador + "      |");
+     }
+   }
+}
+}
+
+-- 3 Tabla de multiplicar del 10:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   // Declaración de variables:
+   
+   int i;
+   int num;
+   int operacion_multiplicacion;
+   
+   System.out.println("Introduce un número para sacar su tabla de multiplicar hasta el 10:");
+   num = sn.nextInt();
+     System.out.println("");
+     System.out.println("        TABLA DE MULTIPLICAR.");
+
+   for (i = 0; i <= 10; i++) {
+     operacion_multiplicacion = num * i;
+         
+     System.out.println("------------------------------------------");
+     System.out.println("             " + num + " x " + i + " = " + operacion_multiplicacion);
+     System.out.println("------------------------------------------");
+   }
+}
+}

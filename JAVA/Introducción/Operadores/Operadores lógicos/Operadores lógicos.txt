@@ -1,0 +1,218 @@
+-- 1 Operadores lógicos usados en Java
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+    // Declaración de variables:
+    
+    int valor1 = 5;
+    int valor2 = 10;
+    
+    // Operadores lógicos:
+    
+    boolean mayor = valor1 > valor2;
+    boolean mayor_igual = valor1 >= valor2;
+    
+    boolean menor = valor1 < valor2;
+    boolean menor_igual = valor1 <= valor2;
+    
+    boolean igual = valor1 == valor2;
+    boolean distinto = valor1 != valor2;
+    boolean inverso = !distinto;
+    
+    // Impresión de los valores:
+    
+    System.out.println("¿Es " + valor1 + " mayor que " + valor2 + "? " + mayor);
+    System.out.println("¿Es " + valor1 + " mayor o igual que " + valor2 + "? " + mayor_igual);
+    System.out.println("");
+    System.out.println("¿Es " + valor1 + " menor que " + valor2 + "? " + menor);
+    System.out.println("¿Es " + valor1 + " menor o igual que " + valor2 + "? " + menor_igual);
+    System.out.println("");
+    System.out.println("¿Es " + valor1 + " igual que " + valor2 + "? " + igual);
+    System.out.println("¿Es " + valor1 + " distinto de " + valor2 + "? " + distinto);
+    System.out.println(" ¿Cuál es el inverso de distinto " + inverso);
+    
+      
+     
+    }
+}
+
+-- 2 Combinaciones lógicas:
+
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  // Declaración de variables:
+  
+     int valor1 = 5;
+     int valor2 = 10;
+  
+ // ------------------- Operador Lógico: OR -----------------------
+                        /*
+                       FALSE || FALSE = FALSE.
+                       TRUE || FALSE = TRUE.
+                       FALSE || TRUE = TRUE.
+                       TRUE || TRUE = TRUE.
+                       */
+   
+                boolean OR = valor1 == 5 || valor2 == 2; // TRUE.
+ // ----------------------------------------------------------------
+  
+ // ------------------- Operador Lógico: AND -----------------------
+                        /*
+                       FALSE && FALSE = FALSE.
+                       TRUE && FALSE = FALSE.
+                       FALSE && TRUE = FALSE.
+                       TRUE && TRUE = TRUE.  
+                       */
+   
+                boolean AND = valor1 > 0 && valor2 < 5; // FALSE.
+ // ----------------------------------------------------------------
+  
+  // ------------------- Combinaciones -----------------------------
+                 
+                boolean combinacion = valor1 > 0 && valor2 < 5 || valor1 != 20; // TRUE.
+ // ----------------------------------------------------------------
+ 
+  // ------------------- Resultados -----------------------------
+                 
+                System.out.println("Resultado para el OR: " + OR);
+                System.out.println("");
+                System.out.println("Resultado para el AND: " + AND);
+                System.out.println("");
+                System.out.println("Resultado para combinación (AND, OR): " + combinacion);
+ // ----------------------------------------------------------------
+  
+    }
+}
+
+-- 3  Casting de caracteres a números (Tabla ASCII).
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  // Declaración de variables:
+  
+     int valor1 = 5;
+     int valor2 = 10;
+ 
+ // Se realiza un Casting explícito para indicar que tanto el sitio donde se almacena; "double division" como el resultado "(double) valor2 / valor1" esté en decimal.
+// - Con casting explícito: Siempre obtendrás una división en punto flotante, conservando los decimales si es necesario.
+// - Sin casting explícito: Si los operandos son enteros, la división será entera y los decimales se perderán, lo que puede resultar en una pérdida de precisión.
+
+  double division = (double) valor2 / valor1;
+  System.out.println("El resultado de la división es: " + division);
+  
+  
+ // Condicional IF para sacar el valor en ASCII de 'A' o 'B' según corresponda en la variable 'valor_caracter':
+ 
+ 
+ char valor_caracter = 'B';
+  
+ if(valor_caracter == 'A') {
+
+ // Castear caracter de tipo 'char' a número:
+   int valor3 = (int) 'A';
+
+   System.out.println("El valor en ASCII de el caracter 'A' es: " + valor3);
+      
+  } else {
+      if(valor_caracter == 'B'){
+
+  // Castear caracter de tipo 'char' a número:
+      int valor3 = (int) 'B';
+
+      System.out.println("El valor en ASCII de el caracter 'B' es: " + valor3);
+      }
+  }
+  
+
+  float valor4 = (float) 1.5;
+  System.out.println("El valor (float) es: " + valor4);
+  
+    }
+}
+
+-- 4 Clase "Math" en Java, Permite realizar operaciones matemáticas más avanzadas como: "Potencias", "Raices cuadradas", "Calcular el seno", "Calcular el coseno" ... 
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  // Variables:
+  
+   int valor1 = -5;
+   double valor2 = 5.3;
+   int valor3 = 25;
+   int valor4 = 2;
+   int valor5 = 120;
+   
+   // Usando Math:
+   
+   // Pasar valor a positivo:
+   int abs = Math.abs(valor1);
+   
+   // Redondear hacia abajo:
+   double floor = Math.floor(valor2);
+   
+   // Redondear hacia arriba:
+   double ceil = Math.ceil(valor2);
+   
+   // Redondeo normal:
+   double round = Math.round(valor2);
+   
+   // Calcular la potencia (Base (A) y Exponente (B)):
+   double pow = Math.pow(valor3, valor4);
+   
+   // Calcular la raíz cuadrada:
+   double sqrt = Math.sqrt(valor3);
+   
+   // Establecer un rango y controlar que no se salga. 
+   int clamp = Math.clamp(valor5, 1, 100);
+   
+   // Impresión de los resultados:
+   
+   System.out.println("Pasar a valor positivo el número: " + valor1 + " => " + abs);
+   System.out.println("Redondear hacia abajo el número: " + valor2 + " => " + floor);
+   System.out.println("Redondear hacia arriba el número: " + valor2 + " => " + ceil);
+   System.out.println("Redondear normal del número: " + valor2 + " => " + round);
+   System.out.println("Calcular la potencia. Base:" + valor3 + " Exponente: " + valor4 + " Resultado => " + pow);
+   System.out.println("Calcular la raíz cuadrada del número: " + valor3 + " => " + sqrt);
+   System.out.println("Rango establecido: '1 - 100' " + " valor del número: " + valor5 + " Resultado => " + clamp);
+   
+       
+}
+    
+}
+
+-- 5 Clase 'Random' en Java para valores aleatorios.
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+  
+   Random r = new Random();
+   
+   // Números aleatorios de tipo entero:
+   
+   int aleatorioInt = r.nextInt(1, 10);
+   System.out.println("Número aleatorio (int): " + aleatorioInt);
+   
+   // Número aleatorios de tipo decimal:
+   
+   double aleatorioDouble = r.nextDouble(1, 10);
+   System.out.println("Número aleatorio (double): " + aleatorioDouble);
+   
+   
+}
+    
+}
+
+
+
+
+

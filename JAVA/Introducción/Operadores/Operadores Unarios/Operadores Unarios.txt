@@ -1,0 +1,31 @@
+-- 1 Prefijo y Sufijo, importante atender a las diferencias de cada uno y usarlos en consecuencia:
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+      int operando = 5;
+      
+      // El valor no se actualiza hasta la siguiente línea:
+      
+        System.out.println("Sufijo ++: " + (operando++));
+        System.out.println("Valor actualizado incrementando (sufijo): " + (operando));
+        
+        System.out.println("Sufijo --: " + (operando--));
+        System.out.println("Valor actualizado decrementando (sufijo): " + (operando));
+        
+        System.out.println("---------------------------------------------------");
+        
+         // El valor no se actualiza antes de la siguiente línea:
+   
+        System.out.println("Prefijo ++: " + (++operando));
+        System.out.println("Valor actualizado incrementando (prefijo): " + (operando));
+        System.out.println("");
+        System.out.println("Prefijo --: " + (--operando));
+        System.out.println("Valor actualizado decrementando (prefijo): " + (operando));
+      
+    }
+}
+
+
+

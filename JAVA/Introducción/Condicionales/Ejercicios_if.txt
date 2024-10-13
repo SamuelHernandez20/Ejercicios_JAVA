@@ -1,0 +1,71 @@
+-- 1 Determinar si el segundo número es divisible por el primero
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  System.out.println("Introduce un primer número por teclado");
+  int num1 = sn.nextInt();
+  
+  System.out.println("Introduce un segundo número por teclado");
+  int num2 = sn.nextInt();
+  
+  double operacion = (double) num1 % num2;
+  
+  if (operacion == 0){
+   
+   System.out.printf("el segundo número: " + num2 + " es divisible entre: " + num1 + " resultado: %.0f", operacion);
+   
+  }  else { 
+    System.out.println("el segundo número: " + num2 + " no es divisible entre: " + num1 + " resultado: " + operacion);
+  
+  }
+   
+}
+    
+}
+
+-- 2 
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  final int RESULTADO_MODULO = 0;      
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  System.out.println("Introduce un año por teclado para calcular si es un año bisiesto");
+  int year = sn.nextInt();
+ 
+  // Primer Bloque de operación:
+  int bloque1 = year % 4;
+  boolean operacion_bloque1 = bloque1 == RESULTADO_MODULO;
+  
+  // Segundo Bloque de operación:
+  int bloque2 = year % 100;
+  boolean operacion_bloque2 = bloque2 != RESULTADO_MODULO;
+  
+  // Tercer Bloque de operación:
+  int bloque3 = year % 400;
+  boolean operacion_bloque3 = bloque3 == RESULTADO_MODULO;
+  
+  // Separación:
+  System.out.println("");
+  
+  if (operacion_bloque1 && operacion_bloque2 || operacion_bloque3){
+      System.out.println("El año " + year + " si es Bisiesto.");
+  } else {
+      System.out.println("El año " + year + " no si es Bisiesto.");
+  }
+  
+}
+
+
+-- 3 
+    
+}

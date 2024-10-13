@@ -1,0 +1,82 @@
+
+-- 1 Ejemplos de como se pueden usar las excepciones en Java con "try catch":
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+    Scanner sn = new Scanner(System.in);
+    
+    // 'InputMismatchException' salta si ponemos un valor incorrecto en Scanner:
+    
+    try {
+        
+     System.out.println("Introduce un número:");
+     int numero = sn.nextInt();
+     System.out.println("El numero introducido es: " + numero);
+   
+   } catch (InputMismatchException e){
+    sn.next();
+    System.out.println("Debes de introducir un número");
+}
+     
+  // 'ArithmeticException' salta cuando dividimos entre 0:
+  
+    try {
+     
+      int operando1 = 10;
+      int operando2 = 5;
+      
+      double division = operando1/operando2;     
+      System.out.println("La división es: " + division);
+   
+   } catch (ArithmeticException e){
+    sn.next();
+    System.out.println("No se puede dividir entre 0");
+} 
+ 
+ // 'ArrayIndexOutOfBoundsException' salta cuando accedemos a un valor fuera de rango:
+ 
+ try {
+     int[] array = {1, 2, 3, 4, 5};
+     System.out.println(array[4]);
+     
+ } catch (ArrayIndexOutOfBoundsException e){
+ 
+     System.out.println("La posición del array está fuera de rango.");
+ }
+  
+ // Se pueden lanzar Excepciones genéricas de esta forma:
+ 
+  try {
+      System.out.println("Introduce un número entre 1 y 10:");
+      int numero = sn.nextInt();
+  
+// Llamada a la función:
+
+   Validar_Numero(numero);
+              
+ // Cuando hay mas de un 'catch' se denomina: "multicatching".
+ 
+ } catch (InputMismatchException e){
+    sn.next();
+    System.out.println("Debes de introducir un número");
+    
+} catch (Exception e){
+     System.out.println(e.getMessage());
+ }
+
+  
+  
+  
+  
+  }  
+   public static void Validar_Numero (int numero ) throws Exception{
+   
+       if ( !(numero >= 0 && numero <= 10)) {
+           throw new Exception ("Debes de introducir un número entre 1 y 10.");
+       }
+ 
+} 
+}

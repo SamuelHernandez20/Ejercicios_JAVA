@@ -1,0 +1,267 @@
+-- 1 Funciones para cadenas en Java:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+  // Declarar strings:
+  
+  String cadena1 = "Hola";
+  String cadena2 = "hola";
+  
+  // Funciones String:
+  System.out.println("Longitud de una cadena: " + cadena1.length());
+  System.out.println("Obtener el caracter 0: " + cadena1.charAt(0));
+  System.out.println("Minúsculas: " + cadena1.toLowerCase());
+  System.out.println("Mayúsculas: " + cadena1.toUpperCase());
+  System.out.println("Concatenar: " + cadena1.concat(cadena2));
+  System.out.println("Substring: " + cadena1.substring(1,3));
+  System.out.println("IndexOf: " + cadena1.indexOf('a'));
+  
+  if (cadena1.equals(cadena2)) {
+      
+      System.out.println("Las cadenas son iguales (equals).");
+  } else {
+        System.out.println("Las cadenas no son iguales (equals).");
+  }
+  
+  
+  if (cadena1.equalsIgnoreCase(cadena2)) {
+      
+      System.out.println("Las cadenas son iguales (equalsIgnoreCase).");
+  } else {
+        System.out.println("Las cadenas no son iguales (equalsIgnoreCase).");
+  }
+       
+   // Recorrer cadenas con un bucle y concatenar:
+   // Resultado esperado para la cadena "Hola":
+
+   /*
+   1. H
+   2. Ho
+   3. Hol
+   4. Hola
+   */
+   
+   String caracter = "";
+   
+       for (int i = 0; i < cadena1.length(); i++) {
+           caracter += cadena1.charAt(i);
+           System.out.println("Valor de la posición: " + i + " caracter asociado: " + caracter);
+           
+       }
+               
+}
+} 
+
+
+-- 2 Pedir una frase por teclado y contar cuántas vocales tiene:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   // Declaración de variables:
+   
+   String frase;
+   char vocales;
+   int contador_vocales;
+   int verificar_frase;
+   int i;
+       
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   // Petición de datos:
+   
+   System.out.println("Introduce una frase por teclado:");
+   frase = sn.next().toLowerCase();
+   
+   // Indexar la posición del espacio:
+   
+   verificar_frase = frase.indexOf(' ');
+   
+   // Si no es una frase se lanzará un error y se detendrá el programa, sino, continuará el flujo de ejecución:
+   
+   if (verificar_frase < 0){
+       System.out.println("Error, debe de introducir una frase completa.");
+   } 
+   else { 
+    contador_vocales = 0;
+    for (i = 0; i < frase.length(); i++) {
+      vocales = frase.charAt(i);
+      switch (vocales) { case 'a', 'e', 'i', 'o', 'u' -> contador_vocales++; }   
+   }
+    if (contador_vocales > 0){
+        System.out.println("Hay " + contador_vocales + " vocales en la frase.");
+    } else {
+        System.out.println("No se introducido ninguna vocal en la frase.");
+    }
+   }
+
+// Cerrar el escáner para liberar recursos:
+   sn.close();
+              
+}
+}
+
+-- 3 Pedir una frase por teclado y contar cuántas mayúsculas y minúsculas hay:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   // Declaración de variables:
+   
+   String frase;
+   int i;
+   int contador_mayusculas;
+   int contador_minusculas;
+   char caracter;
+ 
+       
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   // Petición de datos:
+   
+   System.out.println("CONTADOR DE MAYÚSCULAS Y MINÚSCULAS");
+   System.out.println("------------------------------------");
+   System.out.println("Introduce una frase por teclado:");
+   frase = sn.next();
+   
+   contador_mayusculas = 0;
+   contador_minusculas = 0;
+   
+   for (i = 0; i < frase.length(); i++) {
+     
+    caracter = frase.charAt(i);
+    
+    final boolean RANGO_ASCII_MAYUSCULAS = caracter >= 'A' && caracter <= 'Z';
+    final boolean RANGO_ASCII_MINUSCULAS = caracter >= 'a' && caracter <= 'z';
+    
+    if (RANGO_ASCII_MAYUSCULAS) {
+        contador_mayusculas++;
+        
+    } else if (RANGO_ASCII_MINUSCULAS) { 
+        contador_minusculas++;}
+    }
+
+
+   System.out.println("Total Mayúsculas: " + contador_mayusculas + " Total Minúsculas: " + contador_minusculas);
+   
+  // Cerrar el escáner para liberar recursos:
+   sn.close();
+              
+}
+}
+
+
+-- 4 Eliminar los espacios de una frase, y contar el numero de espacios detectados:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   // Declaración de variables:
+   
+   String frase;
+   String frase_sin_espacios;
+   int contar_espacios;
+   int i;
+   char caracter;
+   final char espacios;
+   
+   // Inicialización de variables:
+   espacios = ' ';
+   frase_sin_espacios = "";
+   contar_espacios = 0;
+   
+   
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   // Petición de datos:
+   System.out.println("Introduce una frase y se procederá a eliminar los espacios:");
+   frase = sn.next();
+   
+   // Concatenar los caracteres no espaciados y contar el número de espacios:
+   for (i = 0; i < frase.length(); i++) {
+   caracter = frase.charAt(i);
+  
+   if (caracter != espacios){
+    frase_sin_espacios += caracter; } 
+    else {
+    contar_espacios++;
+   }
+  }
+   
+   // Impresión de los resultados:
+   System.out.println("");
+   System.out.println("Frase original: " + frase);
+   System.out.println("Número de espacios detectados: " + contar_espacios);
+   System.out.println("Frase sin espacios: " + frase_sin_espacios); 
+   
+  // Cerrar el escáner para liberar recursos:
+   sn.close();
+              
+}
+}
+
+-- 5 Comprobar si la frase es un palíndromo mediante 2 bucles for y realziando concatenaciones:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   // Declaración de variables:
+   
+   String frase;
+   String frase_sin_espacios_al_derecho;
+   String frase_sin_espacios_invertida;
+   char caracter;
+           
+   int i;
+   int j;
+   
+   // Inicialización de variables:
+   
+   frase_sin_espacios_al_derecho = "";
+   frase_sin_espacios_invertida = "";
+   
+ 
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   System.out.println("Introduce una frase, y se comprobará si es un palíndromo:");
+   frase = sn.next();
+   
+   // Concatenar la frase al derecho:
+   for (i = 0; i < frase.length(); i++) {
+   caracter = frase.charAt(i); 
+     if (caracter != ' '){
+     frase_sin_espacios_al_derecho += caracter;
+     }
+  }
+   // Concatenar la frase al revés:
+   for (j = frase_sin_espacios_al_derecho.length() - 1; j >= 0; j--) {
+   caracter = frase_sin_espacios_al_derecho.charAt(j);
+   frase_sin_espacios_invertida += caracter;
+
+ }
+   
+ // Comprobación de si es un palindromo:
+ 
+  if (frase_sin_espacios_al_derecho.equalsIgnoreCase(frase_sin_espacios_invertida)) {
+      System.out.println("La frase es un palíndromo.");
+  } else {
+      System.out.println("La frase no es un palíndromo.");
+  }
+   
+  // Cerrar el escáner para liberar recursos:
+   sn.close();
+              
+}
+}
+

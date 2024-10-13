@@ -1,0 +1,107 @@
+-- 1 Pedir 2 operadores y realizar la suma. El bucle saldrá cuando uno de los 2 operadores, o los 2, sea igual a: -1.
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+    
+     Scanner sn = new Scanner(System.in);
+     sn.useDelimiter("\n");
+         
+    // Declaración e inicialización de los operadores:
+    
+    int operador1 = 0;
+    int operador2 = 0;
+    
+    // Declaración de la variable operación para la suma:
+    
+    int operacion_suma;
+    
+    // Valor de salida del bucle e inicialización de la variable 'entrada_correcta':
+    
+    final int VALOR_SALIDA = -1;
+    boolean entrada_correcta = true;
+          
+    // Bucle While:
+    
+    while (entrada_correcta) {
+              
+    System.out.println("Introduce el operador 1:");
+    operador1 = sn.nextInt();
+    
+    System.out.println("Introduce el operador 2:");
+    operador2 = sn.nextInt();
+    
+    final boolean CONDICION_SALIDA = operador1 == VALOR_SALIDA || operador2 == VALOR_SALIDA;
+    
+    if (CONDICION_SALIDA) {
+      entrada_correcta = false;
+      break;
+      
+   } else {  
+    operacion_suma = operador1 + operador2;
+    System.out.println("El resultado de la suma es: " + operacion_suma);
+    }
+    
+    }
+       
+    // Cerrar el escáner para liberar recursos:
+    sn.close(); 
+    }
+}
+
+
+-- 2 
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   // Declaración variables:
+   int intentos;
+   int numero;
+   
+   // Inicializar variables:
+   intentos = 5;
+   numero = 0;
+
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+   
+   Random random = new Random();
+   int numeroAcertar = random.nextInt(1, 101);
+   
+
+   System.out.println("");
+   System.out.println("###########################");
+   System.out.println("ADIVINA EL NÚMERO SECRETO!");
+   System.out.println("###########################");
+   System.out.println("");
+   
+   while (intentos != 0 && numero != numeroAcertar) {
+       
+   System.out.println("Introduce un número por teclado:");
+   numero = sn.nextInt();
+   
+   if (numero > numeroAcertar){
+       intentos--;
+       System.out.println("El número introducido es mayor que el número secreto.");
+       
+   } else if (numero < numeroAcertar){
+       intentos--;
+       System.out.println("El número introducido es menor que el número secreto."); 
+       
+     if (intentos == 0) {
+        System.out.println("Número de intentos acabado. El juego ha finalizado.");}
+   } else {
+       System.out.println("Muy bien! Has adivinado el número secreto.");  
+     }
+   
+       System.out.println("Te quedan: " + intentos + " intentos.");
+    
+   }
+ 
+  // Cerrar el escáner para liberar recursos:
+   sn.close();
+              
+}
+}

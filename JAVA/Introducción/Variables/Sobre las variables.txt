@@ -1,0 +1,141 @@
+-- 1 Tipos de variables:
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+     // Numero Enteros:
+     
+     byte variableByte = 100;
+     short variableShort = 1000;
+     int variableInt = 100000;
+     long variableLong = 100000000L;
+     
+     // Número Reales:
+     
+     float variableFloat = 100.9999f;
+     double variableDouble = 100.9999999999999;
+     
+     // Booleanos:
+     
+     boolean variableBoolean = true;
+     
+     // Cadenas y caracteres:
+     
+     String variablestring = "Samuel";
+     char variablechar = 'S';
+     
+     // Mostrar los valores:
+     
+     System.out.println("Número Enteros: ");
+     System.out.println("");
+     System.out.println("Variable byte: " + variableByte);
+     System.out.println("Variable short: " + variableShort);
+     System.out.println("Variable int: " + variableInt);
+     System.out.println("Variable long: " + variableLong);
+     System.out.println("");
+     System.out.println("Número Reales: " );
+     System.out.println("");
+     System.out.println("Variable float: " + variableFloat);
+     System.out.println("Variable double: " + variableDouble);
+     System.out.println("");
+     System.out.println("Booleanos: ");
+     System.out.println("");
+     System.out.println("Variable boolean: " + variableBoolean);
+     System.out.println("");
+     System.out.println("Cadena de caracteres: ");
+     System.out.println("");
+     System.out.println("Variable string: " + variablestring);
+     System.out.println("Variable char: " + variablechar);
+     
+    }
+}
+
+ -- 2 Constantes
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+    // Declaración de una constante (la escritura preferentemente en mayúscula):
+    
+    
+    final int VALOR_CONSTANTE = 100;
+    
+    System.out.println("El valor de la constante es: " + VALOR_CONSTANTE);
+     
+    }
+}
+
+
+-- 3 En cuanto a las variables y la petición de datos en Java (Scanner):
+
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+        // Creación del Scanner para la petición de datos:
+        
+        Scanner sn = new Scanner(System.in);   
+        
+        // Recomendado para cuando se pide valores decimales:
+        
+        sn.useLocale(Locale.US);
+
+        // Recomendado para cuando se piden cadenas con espacios:
+        
+        sn.useDelimiter("\n");
+        
+        // Petición de un valor entero:
+        
+        System.out.println("Introduce un valor entero:");
+        int valorentero = sn.nextInt();
+        System.out.println("El número entero es: " + valorentero);
+
+        // Petición de un valor decimal:
+        
+        System.out.println("Introduce un valor decimal:");
+        double valordecimal = sn.nextDouble();
+        System.out.println("El valor decimal es: " + valordecimal);
+        
+        // Petición de una cadena de caracteres:
+        
+        System.out.println("Introduce una cadena:");
+        String valorcadena = sn.next();
+        System.out.println("El valor de la cadena es: " + valorcadena);
+    }
+}
+
+-- 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

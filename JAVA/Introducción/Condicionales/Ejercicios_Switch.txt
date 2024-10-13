@@ -1,0 +1,123 @@
+-- 1
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+   
+  // Petición de un día de la semana:
+ 
+  System.out.println("Introduce un día de la semana en formato numérico (1-7)");
+  int dia_semana = sn.nextInt();
+  
+ 
+  switch (dia_semana) {
+  
+  case 1:
+      System.out.println("Lunes.");
+      break;
+  case 2:
+      System.out.println("Martes.");
+      break;
+  case 3:
+      System.out.println("Miércoles.");
+      break;
+  case 4:
+      System.out.println("Jueves.");
+      break;
+  case 5:
+      System.out.println("Viernes.");
+      break;
+  case 6:
+      System.out.println("Sábado.");
+      break;
+  case 7:
+      System.out.println("Domingo.");
+      break;
+  default:
+      System.out.println("Día no válido.");
+  
+  
+  }
+
+-- 2 Realizar una calculadora, pidiendo 2 operandos y manejando el tipo de operador que introduzca manejando los 4 posibles casos: ( '+' , '-' , '*' , '/' ) con un switch.
+
+public class Ejercicios_Iniciales_Java {
+
+    public static void main(String[] args) {
+        
+        
+  // Declaración de variables para los 4 tipos de operaciones:
+  
+  int sumar;
+  int restar;
+  int multiplicar;
+  double dividir;
+  
+  // Declaración de variables operandos:
+  
+  int operando1;
+  int operando2;
+  
+  // Declaración de la variable operador, y variable de formateo para obtener solo el primer caracter:       
+  
+  String operador;
+  char primer_caracter_operador;
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+   
+  
+  // Petición de los 2 operandos y el operador:
+ 
+  System.out.println("Introduce el operando 1:");
+  operando1 = sn.nextInt();
+  
+  System.out.println("Introduce el operando 2:");
+  operando2 = sn.nextInt();
+  
+  System.out.println("Introduce un operador del tipo: ( '+' , '-' , '*' , '/' ) ");
+  operador = sn.next();
+  
+  primer_caracter_operador = operador.charAt(0);
+  
+  
+ // Evaluación del operador indicado, y ejecución de las operaciones:
+ 
+  switch (primer_caracter_operador) {
+  
+  case '+':
+      sumar = operando1 + operando2;
+      System.out.println("El resultado de la operación de suma es: " + sumar); 
+      break;
+      
+  case '-':
+      if (operando1 >= operando2){
+          restar = operando1 - operando2;
+          System.out.println("El resultado de la operación de resta es: " + restar);
+          
+      } else {
+          System.out.println("El primer operando debe de ser mayor al primero.");}
+      break;
+      
+  case '*':
+      multiplicar = operando1 * operando2;
+      System.out.println("El resultado de la operación de multiplicación es: " + multiplicar);  
+      break;
+      
+  case '/':
+      if (operando2 != 0){
+        dividir = (double) operando1 / operando2;
+        System.out.println("El resultado de la operación de división es: " + dividir);
+      } else {
+          System.out.println("El segundo operando debe de ser distinto de 0.");
+      }
+      break;
+
+  default:
+      System.out.println("Error: Operador no válido.");
+  
+  
+  }

@@ -1,0 +1,352 @@
+-- 1 Explicación de funcionamiento de matrices en Java:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+  
+  // Declarar una matriz en Java:
+  
+  int [][] matriz = {                                  
+      {1, 2, 3},                                       
+      {4, 5, 6},                                     
+      {7, 8, 9}                                                                                         
+  };                                                   
+                                                                                                                                                          
+  // Otra forma de crear una matriz [fila] [columna]:
+  // int [][] matriz = new int [3][3]
+       
+  // Obtener el valor de la fila 1, y la columna 0:
+  
+  System.out.println("Valor de una posición: " + matriz[1][0]);
+  System.out.println("");
+  
+  // Recorrer todas las Filas y Columnas de la matriz con 2 bucles:
+  
+  for (int f = 0; f < matriz.length; f++) {  
+  
+  // El segundo bucle toma por referencia la primera columna de cada iteración, 
+  // porque todas las filas de una matriz 2D tendrán al menos la columna 0 (quizás no la 1, 2, 3 ... ).
+  
+  for (int c = 0; c < matriz[0].length; c++) {
+       System.out.print(matriz [f][c] + " "); }
+       System.out.println("");     
+   }
+  
+/* ANÁLISIS DE FUNCIONAMIENTO DEL BUCLE:
+  
+Primer Iteración  f = 0,  c = 0 => 1 
+Segunda Iteración f = 0,  c = 1 => 2
+Tercera Iteración f = 0,  c = 2 => 3  Se alcanza la longitud máxima de columnas para la primera fila.
+Cuarta Iteración  f = 1,  c = 0 => 4 
+Quinta Iteración  f = 1,  c = 1 => 5
+Sexta Iteración   f = 1,  c = 2 => 6  Se alcanza la longitud máxima de columnas para la segunda fila.
+Séptima Iteración f = 2,  c = 0 => 7
+Octava Iteración  f = 2,  c = 1 => 8
+Novena Iteración  f = 2,  c = 2 => 9  Se alcanza la longitud máxima de columnas para la tercera fila. Fin del Bucle. 
+  
+*/   
+}
+}
+
+-- 1 Pedir una fila por teclado y realizar la suma de los valores de esa fila:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+        
+    // Declaración de la matriz:
+  int [][] matriz = {                                  
+      {1, 2, 3},                                       
+      {4, 5, 6},                                     
+      {7, 8, 9}                                                                                         
+  }; 
+  
+  // Inicialización de variable suma:
+  int suma = 0; 
+
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  System.out.println("Introduce un número de fila por teclado que esté entre 0 y 2:");
+  int fila = sn.nextInt();
+  
+  // Declaración de constante para el IF:
+  final boolean RANGO_FILAS = fila >= 0 && fila <= 2;
+
+  if (!(RANGO_FILAS)){
+    System.out.println("El número de fila introducido no se encuentra en el rango solicitado");
+       
+  } else {
+      
+  // Recorrer una Fila dada y sumar sus elementos
+    for (int c = 0; f < matriz[fila].length; c++) {
+    suma += matriz [fila][c]; }
+    System.out.println("La suma total de elementos para la fila " + fila + " es: " + suma + ".");
+    
+  }
+  }
+  }
+
+-- 2 Pedir una columna por teclado y realizar la suma de los valores de esa columna:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+        
+    // Declaración de la matriz:
+
+  int [][] matriz = {                                  
+      {1, 2, 3},                                       
+      {4, 5, 6},                                     
+      {7, 8, 9}                                                                                         
+  }; 
+  
+  // Inicialización de variable suma:
+  int suma = 0; 
+
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  System.out.println("Introduce un número de columna por teclado que esté entre 0 y 2:");
+  int columna = sn.nextInt();
+  
+  // Declaración de constante para el IF:
+  final boolean RANGO_COLUMNAS = columna >= 0 && columna <= 2;
+
+  if (!(RANGO_COLUMNAS)){
+    System.out.println("El número de columna introducido no se encuentra en el rango solicitado");
+       
+  } else {   
+  // Recorrer una columna dada y sumar sus elementos:
+    for (int f = 0; f < matriz[columna].length; f++) {
+    suma += matriz [f][columna]; }
+    System.out.println("La suma total de elementos para la columna " + columna + " es: " + suma + ".");
+    
+  }
+  }
+  }
+
+-- 3 Crea una matriz de caracteres, donde este todo vacío excepto una donde este el caracter "X".
+     El objetivo es mover la "X" por el tablero sin que se salga del propio tablero.
+     Las direcciones son: arriba, abajo, izquierda y derecha.
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+        
+    // Declaración de la matriz:
+
+  char [][] tablero = {                                  
+      {'_', '_', '_'},  
+      {'_', '_', '_'},
+      {'_', 'X', '_'},
+      {'_', '_', '_'},
+      {'_', '_', '_'}
+      
+                                                                                               
+  }; 
+  
+  
+  // Declaración de variable de salida:
+  boolean salida;
+  salida = true;
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  int fila = 2;
+  int columna = 1;
+  
+  do { 
+      
+  System.out.println("1. Escribe: 'UP' para mover la 'X' hacia arriba.");
+  System.out.println("2. Escribe: 'DOWN' para mover la 'X' hacia abajo.");
+  System.out.println("3. Escribe: 'LEFT' para mover la 'X' hacia la izquierda.");
+  System.out.println("4. Escribe: 'RIGHT' para mover la 'X' hacia la derecha.");
+  System.out.println("5. Escribe: 'Salir' para finalizar el juego.");
+  String direccion = sn.next().toUpperCase();
+
+  switch (direccion) {
+  
+  case "UP":
+       
+        if ( fila != 0) {
+            
+            System.out.println("Moviendo hacia arriba...");
+            //Limpieza del tablero:
+            tablero [fila][columna] = '_';
+            fila--;
+            // Actualización de movimiento
+            tablero [fila][columna] = 'X'; 
+        }
+        else {
+        System.out.println("No me puedo mover hacia arriba.");
+        }
+        break;
+        
+  case "DOWN":
+      
+       if ( fila != tablero.length - 1) {
+            
+            System.out.println("Moviendo hacia abajo...");
+            //Limpieza del tablero:
+            tablero [fila][columna] = '_';
+            fila++;
+            // Actualización de movimiento:
+            tablero [fila][columna] = 'X'; 
+        }
+        else {
+        System.out.println("No me puedo mover hacia abajo.");
+        }
+     break;
+     
+  case "LEFT":
+      
+      if (columna != 0){
+      System.out.println("Moviendo hacia la izquierda...");
+      //Limpieza del tablero:
+      tablero [fila][columna] = '_';
+      columna--;
+      // Actualización de movimiento:
+       tablero [fila][columna] = 'X';
+      } else {
+      System.out.println("No me puedo mover hacia la izquierda.");
+      }
+     break;
+     
+  case "RIGHT":
+      if (columna != tablero[fila].length - 1){
+      System.out.println("Moviendo hacia la derecha...");
+      
+      //Limpieza del tablero:
+      tablero [fila][columna] = '_';
+      columna++;
+      // Actualización de movimiento:
+       tablero [fila][columna] = 'X';
+      
+      } else {
+       System.out.println("No me puedo mover hacia la derecha.");
+      }
+    break;
+    
+  case "Salir":
+      System.out.println("Juego Finalizado.");
+      salida = false;
+      break;
+      
+  default:
+      System.out.println("Dirección de movimiento inválida.");
+  }  
+  
+  // Mostrar Tablero:
+    mostrar_tablero(tablero);
+    System.out.println("");
+    
+    } while (salida);
+   }
+   
+   public static void mostrar_tablero (char[][] tablero){
+   
+    for (int f = 0; f < tablero.length; f++) {
+     for (int c = 0; c < tablero[0].length; c++) {    
+      System.out.print(tablero [f][c] + " ");                
+ }    
+    System.out.println(""); 
+}
+   }
+}
+
+
+-- 4 Tabla SQL en JAVA
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+        
+  // Declaración de variables:
+ 
+  int filas;
+  int columnas;
+  String cabecera;
+  String encabezado_tabla;
+  String registros;
+  boolean salida = true;
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+  
+  
+  while (salida) {
+      
+  System.out.println("Introduce el número de Columnas para la Tabla:" );
+  columnas = sn.nextInt();
+  System.out.println("Introduce el número de Filas para la Tabla:" );
+  filas = sn.nextInt();
+  
+  if (columnas != filas){
+      System.out.println("");
+      System.out.println("Error, la Tabla debe de poseer el mismo número de Columnas y Filas.");
+      System.out.println("Vuelva a introducir los valores.");
+      System.out.println("");
+      salida = true;
+      
+  } else{  
+    salida = false; 
+  // Dar a la matriz las dimensiones especificadas[fila][columna]:
+    String [][] Tabla = new String [filas+1][columnas];
+  
+  // Establecer el encabezado de la Tabla SQL:
+    for (int encabezado = 0;  encabezado < Tabla[0].length; encabezado++) {  
+
+        System.out.println("Introduzca el valor " + (encabezado + 1) + " para el encabezado: " );
+        cabecera = sn.next();
+        Tabla[0][encabezado] = cabecera; }
+   
+  // Establecer los valores para los registros de la Tabla SQL, sin sobreescribir el encabezado, por eso: "int f = 1":
+    for (int f = 1; f < Tabla.length; f++) {  
+       for (int c = 0; c < Tabla[0].length; c++) {
+           
+          encabezado_tabla = Tabla[0][c];
+          System.out.println( "Para el registro " + f + " de Columna '" + encabezado_tabla + "' introduzca el Valor " + ( c + 1) );
+          registros = sn.next();
+          Tabla[f][c] = registros; } }
+   
+  // Llamada a la función para mostrar la Tabla SQL:
+    mostrar_tabla_SQL (Tabla);
+  
+   } // Fin del if.
+  
+} // Fin del while.
+  
+  } // Fin del main.
+  
+     public static void mostrar_tabla_SQL (String [][] tablero){
+         
+    System.out.println("");  
+    System.out.println("   TABLA SQL                   ");
+    System.out.println("---------------------------------------------");
+    for (int f = 0; f < tablero.length; f++) {
+     for (int c = 0; c < tablero[0].length; c++) { 
+          System.out.print(tablero [f][c] + "    "); 
+     }      
+          System.out.println(""); 
+    }  
+    
+    
+}
+}
+   
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,464 @@
+-- 1 Sintaxis de creación de un array y recorrerlo con bucles: for y foreach.
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+  // Forma 1 de declarar un array:
+  
+  int[] array = new int[10];
+  
+  // Forma 2 de declarar un array:
+  // int[] array = { 10, 20, 30, 40, 50 };
+  
+  // Recorrer el array con un for y asignarle valores:
+  
+   for (int i = 0; i < array.length; i++) { 
+   // Multiplicación del contador por 10, sumandole "1" para que no multiple el número "0".
+   array[i] = (i+1)*10;
+   }
+   
+   // Recorrer el array con for para la impresión de los nuevos valores:
+   System.out.println("- Valores ingresados en el array de números:");
+   System.out.println("");
+   
+   for (int i = 0; i < array.length; i++) { 
+      System.out.println(array[i]);
+
+   }
+  
+    // Recorrer el array de forma más directa (foreach):
+    System.out.println("");
+    System.out.println("- Valores ingresados en el array de números (foreach):");
+    
+    for (int n : array) {
+       System.out.println(n);
+      }
+	
+}
+   
+}
+
+-- 2 Sumar los elementos de un array y obtener su media:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   // Declaración de variables:
+   int suma = 0;
+   double media;
+  
+  // Creación de array de números
+  int[] array = { 10, 20, 30, 40, 50, 60, 70, 80};
+  
+  // Recorrer el array con un for y asignarle valores:
+  
+   for (int i = 0; i < array.length; i++) { 
+    suma+=array[i];
+   }
+   
+   media = (double) suma / array.length;
+   
+   System.out.println("La suma de sus valores es: " + suma);
+   System.out.println("La media de los valores es: " + media);
+   
+}
+   
+}
+
+-- 2 Obtener el número mayor y menor de un array numérico:
+
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+    
+  // Creación de array de números
+  int[] array = {20, 30, 40, 100, 60, 70, 10};
+         
+  // Declaración de variables:
+  int mayor = array[0];
+  int menor = array[0];
+
+
+  // Recorrer el array con un for y asignarle valores:
+  
+   for (int i = 1; i < array.length; i++) { 
+ 
+       if (array[i] > mayor) {
+           mayor = array[i];
+       } else {
+           menor = array[i];
+       } 
+}
+       System.out.println("El número mayor es: " + mayor);
+       System.out.println("El número menor es: " + menor);
+   
+}
+}
+
+-- 3 Dados 2 arrays: uno con nombres de personas, y otro con edades, indicar cuál es la persona con más edad:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   // Función para generar números aleatorios:
+   Random random = new Random();
+    
+  // Creación de array  personas:
+  String[] array_personas = {"Samuel", "Jorge", "Manolo", "Antonio", "Rodrigo", "Alejandro"};
+  
+  // Creación de array para las edades:
+  int[] array_edades = new int[6];
+  
+ 
+  // Declaracion variables:
+   
+  //int edad_mayor = array_edades[0];
+  int edad;
+  String la_persona_mas_mayor;
+  String la_persona_menor;
+         
+
+  // Llenar array de edades con edades aleatorias:
+  
+   for (edad = 0; edad <= array_edades.length-1; edad++) { 
+    int numero_aleatorio = random.nextInt(20, 41);
+    array_edades[edad] = numero_aleatorio;
+    
+}
+   
+   int posicion_edad_mayor = 0;
+   int posicion_edad_menor = 0;
+   
+ // Recorrer el array con edades aleatorias y calcular la edad aletoria mayor:
+ 
+   for (edad = 0; edad <= array_edades.length-1; edad++) { 
+       
+      System.out.println("Nombre: " + array_personas[edad] + " edad: " + array_edades[edad]);
+
+      if (array_edades[edad] > array_edades[posicion_edad_mayor]) {
+         // Guardar la posición de la persona mayor.
+         posicion_edad_mayor = edad;
+         
+    } else if ( array_edades[edad] < array_edades[posicion_edad_mayor]) 
+       {  // Guardar la posición de la persona menor.
+           posicion_edad_menor = edad;
+       }
+
+}
+ // Determinar a que persona le corresponde la edad aleatoria mayor:    
+ 
+        la_persona_mas_mayor = array_personas[posicion_edad_mayor];
+        la_persona_menor = array_personas[posicion_edad_menor];
+        
+        System.out.println("La persona con mayor edad es: " + la_persona_mas_mayor);
+        System.out.println("La persona con menor edad es: " + la_persona_menor);
+ 
+}
+}
+
+
+-- 4 Funciones de java para los arrays:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+       
+   // Declaración de 2 arrays numéricos:
+   
+   int[] array1 = {20, 10, 30, 50, 40};
+   int[] array2 = {20, 10, 30, 50, 40};
+   
+   System.out.println("Array 1: " + Arrays.toString(array1));
+   System.out.println("Array 2: " + Arrays.toString(array2));
+   
+   // Ordenar el array 1 y array 2:
+   Arrays.sort(array1);
+   Arrays.sort(array2);
+   
+   
+   //Mostrar el array 1 ordenado:
+   System.out.println("");
+   System.out.println("Ordenación de Array 1: " + Arrays.toString(array1));
+   System.out.println("Ordenación de Array 2: " + Arrays.toString(array2));
+   
+   if (Arrays.equals(array1, array2)) {
+    System.out.println("Los arrays son iguales.");
+   } else {
+     System.out.println("Los arrays son diferentes.");
+   
+   }
+   
+ 
+}
+}
+
+-- 5 Comparar si es capicúa, para ello se creará un bucle con 2 indices: (i, j) donde uno incrementará (i) y otro decrementará (j). 
+     Luego se rellenará con los valores invertidos del primer array el array invertido en el bucle, con el fin de verificar fuera de este, si son o no son capicúa:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+    int[] array = {2, 3, 2, 2, 3, 2};
+    int[] array_Invertido = new int[array.length];
+    
+    for (int i = 0, j = array.length-1; i < array.length; i++, j--) {
+    
+     // Rellenar el array inverso con los valores al reves del primer primer Array:
+     array_Invertido[i] = array[j];
+}
+    
+    if (Arrays.equals(array, array_Invertido)) {
+        System.out.println("Los arrays son capicúa.");
+    } else {
+        System.out.println("Los arrays no son capicúa.");
+    }
+}
+}
+
+
+--  6 Fusionar 2 arrays en un tercer array:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+    // Se fusionarán los elementos de estos 2 arrays en array3:
+    int[] array1 = {1,2,3,4,5};
+    int[] array2 = {6,7,8,9,10};
+    
+    // Tercer array cuya longitud será la suma de la longitud de los 2 anteriores:
+    int[] array3 = new int[array1.length + array2.length]; 
+    
+    // Rellenar los valores del array1 en el array3:
+   for (int i = 0; i < array1.length; i++) {
+       array3[i] = array1[i];     
+    }
+   
+    // Rellenar los valores del array2 en el array3:
+   for (int i = 0; i < array2.length; i++) {
+    // se obtiene la longitud de la posición ultima, y se suma la siguiente para unificar la parte restante:
+       array3[array1.length + i] = array2[i];     
+    }
+   
+    System.out.println("El resultado de la fusión del array1 y array2 en el array 3:");
+    System.out.println(Arrays.toString(array3));
+    
+   
+}
+}
+
+
+-- 7 Fusionar 3 arrays en un cuarto array:
+
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+    // Se fusionarán los elementos de estos 2 arrays en array3:
+    int[] array1 = {1,2,3,4,5};
+    int[] array2 = {6,7,8,9,10};
+    int[] array3 = {11,12,13,14,15};
+     
+    // Cuarto array de fusión:
+    int[] array4 = new int[array1.length + array2.length + array3.length]; 
+    
+    // Rellenar los valores del array1 en el array3:
+   for (int i = 0; i < array1.length; i++) {
+       array4[i] = array1[i];     
+    }
+   
+    // Rellenar los valores del array2 en el array4:
+   for (int i = 0; i < array2.length; i++) {
+       array4[array1.length + i] = array2[i];     
+    }
+   
+   // Rellenar los valores del array3 en el array4:
+   for (int i = 0; i < array3.length; i++) {
+       array4[array1.length + array2.length + i] = array3[i];     
+    }
+   
+   // Rellenar los valores del array3 en el array4:
+   
+    System.out.println("El resultado de la fusión del array1, array2 y array3 :");
+    System.out.println(Arrays.toString(array4));
+    
+   
+}
+}
+
+
+------- Funciones y Arrays --------
+
+
+Hay que tener en cuenta que las diferencias entre los parámetros pasados por referencia y valor (tipo primitivo).
+
+ - Para el primer caso, suponiendo que tengo un array por referencia (externo a la función), se puede modificar 
+   y se mostrará el valor modificado sin tener que hacer un "return", ya que se trabaja sobre el objeto original.
+
+ - Pero si es por valor, habrá que retornarlo para que el valor modificado refleje los cambios.
+
+
+
+-- 1 Se creará una función booleana llamada "existencia_elemento", a la que se le pasarán 2 parametros: un array (int), un elemento (int).
+     la función se encargará de recorrer el array con un bucle for, y determinar si el elemento existe o no existe. 
+     En caso verdadero retornar "true", en caso contrario "false".
+
+
+ public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+  
+  // Declaración de variables y el array:
+  
+  boolean resultado_funcion;
+  int elemento;
+  int[] array = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+  
+  Scanner sn = new Scanner(System.in);
+  sn.useDelimiter("\n");
+ 
+  System.out.println("Introduce un elemento numérico a buscar dentro del array:");
+  elemento = sn.nextInt();
+  
+  resultado_funcion = existencia_elemento (array, elemento);
+  
+  if (resultado_funcion) {
+    System.out.println("La búsqueda del elemento ha sido existosa. :)");
+  } else{
+    System.out.println("La búsqueda del elemento no ha sido existosa. :(");
+  }
+  
+// Cerrar el escáner para liberar recursos:
+  sn.close(); 
+   
+}
+   
+   public static boolean existencia_elemento (int[] array, int elemento){
+       
+      for (int i = 0; i < array.length; i++) {
+          
+           if (array[i] == elemento) {
+               return true;
+           }
+      }
+       return false;
+       
+   }
+   }
+
+
+
+-- 2 Crear un función que guarde en un array números aleatorios entre un mínimo y máximo:
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+  
+  // Declaración del array vacío:
+  
+  int [] array = new int [10];
+
+  // Llamada a la función:
+  guardar_numeros_aleatorios(array, 1, 100);
+  
+  System.out.println("Los números aleatorios guardados en el array son:");
+  System.out.println("");
+
+  for (int i = 0; i < array.length; i++) {
+      
+   if (array[i] < 10){
+       System.out.println("||" + array[i] + "|");
+       
+    } else {
+       System.out.println("|" + array[i] + "|");
+   }
+   
+   
+      
+     }
+}
+   
+    // Declarar una función (int) para generar un número aleatorio:
+    
+  public static int Random_function (int parametro1, int parametro2) {
+  
+      Random random = new Random();
+      int numero_aleatorio = random.nextInt(parametro1, parametro2);
+     
+      return numero_aleatorio;
+   }
+   
+   
+   public static void guardar_numeros_aleatorios (int[] array, int parametro1, int parametro2){
+       
+      for (int i = 0; i < array.length; i++) {
+          int numeros_aleatorios = Random_function (parametro1, parametro2);
+          array[i] = numeros_aleatorios;
+      }
+      
+       
+   }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+

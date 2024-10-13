@@ -1,0 +1,158 @@
+Los enumerados en Java son un tipo especial donde almacenamos un serie de constantes,
+por lo que suelen ser usados para almacenar datos que no van a cambiar como: un menú, los meses del año ... 
+
+-- 1
+
+// Cuando el número de elementos crece exponencialmente no conviene tanto esta estructura porque habría que evaluar uno a uno:
+----------------------------------------------
+public enum Colores_Enum {
+  
+    BLANCO,
+    AMARILLO,
+    ROJO,
+    AZUL,
+    NEGRO;
+
+}
+-----------------------------------------------
+
+// Por lo que desde el archivo principal se puede acceder al enumerado de forma fácil:
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+   try{
+       
+   String colorBuscado = "AZUL";
+   
+   // El uso de 'valueOf' se encarga de recibir un String y verificar que coincida con los colores establecidos en el enumerado:
+   
+   Colores_Enum color = Colores_Enum.valueOf(colorBuscado);
+   System.out.println("El color " + color + " existe.");
+   System.out.println("");
+   
+   } catch (IllegalArgumentException e){ 
+   System.out.println("El color no existe.");
+   System.out.println("");
+  
+   }
+  
+  // Mostrar todos los colores del enumerado con un bucle foreach:
+
+  System.out.println("Los Colores son:");
+  System.out.println(""); 
+  
+  for (Colores_Enum value : Colores_Enum.values()) {
+       System.out.println(value);
+   }
+  
+}  
+} 
+
+
+-- 2 
+
+-- Enumerado con los meses del año: (archivo Meses_año.java)
+
+public enum Meses_año { Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre}
+
+-- Archivo Principal (ejercicios_iniciales_java.java) es donde interactuo con el enumerado, y en función del mes introducido le dirá al usuario
+   si tiene 30 o 31 días. En el caso del mes de Febrero, como es un mes que no tiene 30, ni 31, se pedirá por teclado un año del que se calculará
+   si es bisiesto o no, y se devolverá el número de días en consecuencia. (Para mayor claridad calcular el año bisiesto con una función que retorne el numero de días).
+
+
+public class Ejercicios_Iniciales_Java {
+
+   public static void main(String[] args) {
+   
+try { 
+    
+   Scanner sn = new Scanner(System.in);
+   sn.useDelimiter("\n");
+  
+  // Impresión de los meses del enumerado:
+  System.out.println("-------------- MESES DE AÑO ---------------------");
+  
+  for (Meses_año value : Meses_año.values()) {
+       System.out.println(value.name().toUpperCase());
+   }
+  
+  System.out.println("------------------------------------------------");
+   
+  // Petición de datos:
+  System.out.println("Introduce uno de los siguientes meses del año:"); 
+  String mesBuscado = sn.next();
+  System.out.println("");
+  
+  Meses_año mes = Meses_año.valueOf(mesBuscado);
+  
+  switch (mes) {
+ 
+ // Meses que tienen 31 días:
+  case Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre ->
+  System.out.println("El mes de " + mes + " tiene 31 días.");
+  
+ // Meses que tienen 30 días:
+  case Abril, Junio, Septiembre, Noviembre ->
+  System.out.println("El mes de " + mesBuscado + " tiene 30 días."); 
+  
+ // El Mes 'Febrero' puede tener 28 o 29 días, dependiendo de si es bisiesto:
+  case Febrero -> {   
+  System.out.println("Para el mes de " + mesBuscado + " es necesario que introduzcas el año: ");  
+  int year = sn.nextInt();
+  
+  // Llamada a la función para determinar si el año introducido es bisiesto:
+  int Dias_Febrero = Calcular_Bisiesto(year);
+  
+  if (Dias_Febrero == 29) {
+      System.out.println("Para el año " + year + " el mes de " + mesBuscado + " tiene " + Dias_Febrero + " días."); 
+  } else {
+      System.out.println("Para el año " + year + " el mes de " + mesBuscado + " tiene " + Dias_Febrero + " días.");
+  };
+   
+  }
+  } // Fin Switch.
+  
+  } catch (IllegalArgumentException e){ 
+   System.out.println("El mes introducido no es válido");
+   System.out.println("");
+   
+   } catch (InputMismatchException e){
+    System.out.println("Debes insertar números.");
+  
+   }  
+       
+}   
+   public static int Calcular_Bisiesto (int year){
+   
+   final int RESULTADO_MODULO = 0;      
+  
+  // Primer Bloque de operación:
+  int bloque1 = year % 4;
+  boolean operacion_bloque1 = bloque1 == RESULTADO_MODULO;
+  
+  // Segundo Bloque de operación:
+  int bloque2 = year % 100;
+  boolean operacion_bloque2 = bloque2 != RESULTADO_MODULO;
+  
+  // Tercer Bloque de operación:
+  int bloque3 = year % 400;
+  boolean operacion_bloque3 = bloque3 == RESULTADO_MODULO;
+  
+  if (operacion_bloque1 && operacion_bloque2 || operacion_bloque3){
+      return 29;
+  } else {
+      return 28;
+  }
+       
+       
+       
+       
+   }
+   
+} 
+
+
+
+
