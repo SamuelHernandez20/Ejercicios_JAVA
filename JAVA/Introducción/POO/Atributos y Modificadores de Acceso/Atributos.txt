@@ -1,0 +1,270 @@
+---------------- Introducción ------------------
+
+A partir de las clases se pueden crear diferentes objetos.
+
+- Ejemplos:
+
+He creado una clase llamada persona, la cual tendrá sus atributos, métodos, etc...
+
+
+"public class Persona {
+        
+}"
+
+-- A partir de dicha clase, en otro archivo a parte (App.java) puede crear objetos de la clase "Persona"
+   (Instanciar un Objeto):
+
+"public class App {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        // Objeto de tipo Persona
+        Persona p = new Persona();
+           
+    }
+    
+}"
+
+---------------- Atributos ------------------
+
+
+- Clase Persona con sus atributos:
+
+public class Persona {
+    
+    // Atributos de la clase persona
+    String nombre;
+    String apellido1;
+    String apellido2;
+    int edad;
+     
+}
+
+
+- Instanciar un Objeto:
+
+public class POO {
+
+    public static void main(String[] args) {
+        
+        // Objeto de tipo Persona
+        Persona p = new Persona();
+        
+       // Acceder a los Atributos:
+       p.nombre = "Samuel";
+       p.apellido1 = "Hernández";
+       p.apellido2 = "Santisteban";
+       p.edad = 21;
+
+       // Esto solo es un ejemplo didáctico, no se deben de acceder directamente a los atributos en POO ya que no es seguro. 
+       // Para ello se verán a continuación métodos para obtener, modificar, etc..
+
+       System.out.println("El nombre es: " + p.nombre + ", los apellidos: " + p.apellido1 + " " + p.apellido2 + ", la edad es: " + p.edad);
+    }
+}
+
+---------------- Modificadores de Acceso ------------------
+
+Con los modificadores de acceso se puede establecer un control sobre los atributos.
+Existen 3: Public, Private y Protected.
+
+1. Private: No se puede ver nada fuera de la clase.
+2. Protected: Es similar pero entre clases jerárquicas.
+3. Public: Hace que el atributo sea accesible a todas las clases de todos los paquetes.
+
+Ejemplo 1 (Private):
+
+public class Persona {
+    
+    private String nombre;
+    String apellido1;
+    String apellido2;
+    int edad;
+     
+}
+
+
+Ejemplo 2 (Protected):
+
+public class Persona {
+    
+    protected String nombre;
+    String apellido1;
+    String apellido2;
+    int edad;
+     
+}
+
+Para mejores prácticas de seguridad se definiran todos los atributos como "private":
+
+public class Persona {
+    
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+     
+}
+
+---------------- Constructores ------------------
+
+Los Constructores permiten inicializar los valores de los atributos de una clase.
+Para el caso de tener lo atributos privados, como es el caso, y no poder acceder directamente
+a ellos desde fuera de la clase, para eso se usará el constructor.
+
+
+public class Persona {
+    
+    // Definir Atributos:
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    
+    
+     // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+       public Persona (String nombre, String apellido1, String apellido2, int edad){
+       
+     // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+         this.nombre = nombre;
+         this.apellido1 = apellido1;
+         this.apellido2 = apellido2;
+         this.edad = edad;
+         
+         System.out.println("Nombre: " + nombre);
+         System.out.println("Apellido1: " + apellido1);
+         System.out.println("Apellido2: " + apellido2);
+         System.out.println("Edad: " + edad);
+       } 
+  
+}
+
+En otro archivo se pasan los valores como parámetros:
+
+public class POO {
+
+    public static void main(String[] args) {
+        
+        // Objeto de tipo Persona:
+        Persona p = new Persona("Samuel", "Hernández", "Santisteban", 21);     
+    }
+}
+
+Se introduce a continuación el concepto de "Constructor vacío", es útil cuando a las
+variables que se pasa por referencia se quieren pasar por defecto con algún valor, por ejemplo: 0.
+
+
+public class Persona {
+    
+    // Definir Atributos:
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    
+    
+    // Definir Constructor vacío para asignar valores por defecto a las variables:
+    
+      public Persona () {
+         this.nombre = "";
+         this.apellido1 = "";
+         this.apellido2 = "";
+         this.edad = 0;
+
+           }
+     // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+       public Persona (String nombre, String apellido1, String apellido2, int edad){
+       
+     // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+         this.nombre = nombre;
+         this.apellido1 = apellido1;
+         this.apellido2 = apellido2;
+         this.edad = edad;
+         
+         System.out.println("Nombre: " + nombre);
+         System.out.println("Apellido1: " + apellido1);
+         System.out.println("Apellido2: " + apellido2);
+         System.out.println("Edad: " + edad);
+       } 
+   
+}
+
+En el otro archivo simplemente se puede dejar asi (en caso de no poner constructor vacío daría error en este archivo):
+
+public class POO {
+
+    public static void main(String[] args) {
+        
+        // Objeto de tipo Persona
+        Persona p = new Persona();
+           
+    }
+}
+
+------ Validar parámetros de los constructores -------
+
+public class Persona {
+    
+    // Definir Atributos:
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    
+    
+    // Definir Constructor vacío para asignar valores por defecto a las variables:
+    
+      public Persona () {
+         this.nombre = "";
+         this.apellido1 = "";
+         this.apellido2 = "";
+         this.edad = 0;
+
+           }
+     // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+       public Persona (String nombre, String apellido1, String apellido2, int edad){
+       
+        // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+         this.nombre = nombre;
+         this.apellido1 = apellido1;
+         this.apellido2 = apellido2;
+         this.edad = edad;
+         
+         if (edad < 0) {
+         throw new IllegalArgumentException("La edad no puede ser negativa."); 
+         
+         } else {
+             
+         System.out.println("Nombre: " + nombre);
+         System.out.println("Apellido1: " + apellido1);
+         System.out.println("Apellido2: " + apellido2);
+         System.out.println("Edad: " + edad);
+         
+         } 
+           
+       }  
+}
+
+ En el otro archivo se agrego un bloque try-catch para evaluar para que mande un mensaje de error si introduce un numero negativo para la edad:
+
+public class POO {
+
+    public static void main(String[] args) {
+       
+        try {   
+        // Objeto de tipo Persona
+        Persona p = new Persona("Samuel", "Hernandez", "Santisteban", 21);
+            
+        } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+      
+    }
+}
+
+
+

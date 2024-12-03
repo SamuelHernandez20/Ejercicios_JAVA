@@ -1,0 +1,313 @@
+Primer archivo: Clase "Empleado2"
+
+
+package Empresa2;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Samuel
+ */
+public class Empleado2 {
+
+// Definición de los atributos:
+    private String Dni;
+    private String Nombre;
+    private int Edad;
+    private Departamento departamento;
+    private boolean Teletrabajo;
+// Definición de atributo que es un objeto de la clase "Empresa":
+    private Empresa empresa; 
+    
+// Definición de atributo estático para el salario base:    
+    private static double Salario_Base = 900;
+    
+// Encapsulamiento de todos los atributos:
+
+    public String getDni() {
+        return Dni;
+    }
+
+    public void setDni(String Dni) {
+        this.Dni = Dni;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public int getEdad() {
+        return Edad;
+    }
+
+    public void setEdad(int Edad) {
+        this.Edad = Edad;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public boolean isTeletrabajo() {
+        return Teletrabajo;
+    }
+
+    public void setTeletrabajo(boolean Teletrabajo) {
+        this.Teletrabajo = Teletrabajo;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+   // Aquí deben de ponerse como estáticos por el tipo de atributo: 
+    public static double getSalario_Base() {
+        return Salario_Base;
+    }
+
+    public static void setSalario_Base(double Salario_Base) {
+        Empleado2.Salario_Base = Salario_Base;
+    }
+
+    // Creación de Constructor por Defecto:
+    public Empleado2(String Dni, String Nombre, int Edad, Departamento departamento, boolean Teletrabajo, Empresa empresa) {
+        
+        try {
+            Validación.validar_dni(Dni);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+        
+        if (Edad < 0) {
+            throw new IllegalArgumentException("No se puede introducir un valor negativo para la edad.");
+        }
+        
+        if (empresa == null) {
+            throw new IllegalArgumentException("La Empresa es obligatoria.");
+        }
+
+        this.Dni = Dni;
+        this.Nombre = Nombre;
+        this.Edad = Edad;
+        this.departamento = departamento;
+        this.Teletrabajo = Teletrabajo;
+        this.empresa = empresa;
+    }
+
+    // Método Calcular_Sueldo() para las acciones que puede realizar el empleado:
+    public double Calcular_Sueldo() {
+    
+    double salario = Empleado2.Salario_Base;
+    
+   // Incrementar el sueldo base dependiendo de la edad y de su modalidad de trabajo:
+    if (this.Edad > 30){
+        salario += 200;
+    }
+  // Incrementar el salario dependiendo del departamento (Contabilidad, Informática y Dirección):  
+    salario += this.departamento.getPlus();
+    
+    if (this.isTeletrabajo()){
+        salario += 30;
+    }  
+    return salario;
+    }
+    
+    // Método Calcular_Antiguedad() para retornar los años que lleva en esa empresa:
+    public int Calcular_Antiguedad(int Año_Ingreso) throws Exception{
+        
+    LocalDateTime hoy = LocalDateTime.now();
+    int año_actual = hoy.getYear();
+    int año_ingreso = Año_Ingreso;
+    
+    if (año_ingreso <= 0) {
+      throw new Exception("El año de ingreso no puede tener un valor cero o negativo.");
+   } else {
+       if (año_actual < año_ingreso) {
+      throw new Exception("El año de ingreso no puede ser mayor al actual");
+    }
+    } 
+    return año_actual - año_ingreso;
+    
+    } 
+
+   // Un empleado será igual a otro cuando tienen el mismo DNI:
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.Dni);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empleado2 other = (Empleado2) obj;
+        return Objects.equals(this.Dni, other.Dni);
+    }
+    
+    // Mostrar la información mediante ToString():
+    @Override
+    public String toString() {
+        
+        String mensaje = "El Dni es:" + Dni + ", Nombre:" + Nombre + ", Edad:" + Edad + ", pertenece al Departamento: " 
+                          + departamento + ", su Empresa: " + empresa + ", ¿teletrabaja?";  
+        
+        if(!this.isTeletrabajo()) {
+            mensaje += " No.";
+        } else {
+            mensaje += " Si.";  
+        }
+        
+        return mensaje;
+    }
+          
+} // Cierre de la clase "Empleado2".
+    
+     
+-- Segundo archivo: Enumerado con los Departamentos:
+
+public enum Departamento {
+    Contabilidad(50),
+    Informática(80),
+    Dirección(100);
+    
+    // Definición del Atributo plus:
+    private double plus;
+
+    // Creación de un Constructor para el atributo
+    private Departamento(double plus) {
+        this.plus = plus;
+    }
+    
+    // Método Get para el atributo:
+    public double getPlus() {
+        return plus;
+    }
+    
+}
+
+-- Tercer archivo: Clase "Empresa" usada como atributo-objeto
+
+public class Empresa {
+ 
+  private String Cif;
+  private String nombre; 
+
+    // Constructor Vacío:
+    public Empresa() {
+     this("","");
+    }
+
+   // Constructor por Defecto:
+    public Empresa(String Cif, String nombre) {
+        this.Cif = Cif;
+        this.nombre = nombre;
+    }
+    
+   // Encapsulamiento de todos sus Atributos:
+
+    public String getCif() {
+        return Cif;
+    }
+
+    public void setCif(String Cif) {
+        this.Cif = Cif;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "El Cif de la empresa es: " + Cif + ", y su Nombre: " + nombre + ".";
+    }
+    
+     
+}
+
+-- Cuarto archivo: Método para validar el DNI
+
+public class Validación {
+    
+    public static void validar_dni(String dni) throws Exception{
+    
+    if (!dni.matches("^[0-9]{7,8}[T|R|W|A|G|M|Y|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$")) {
+        throw new Exception("El formato del DNI es Incorrecto"); 
+    } 
+}
+}
+
+-- Quinto archivo: Salida de la Información
+
+
+public class Objeto {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws Exception {
+     
+     try {  
+     // Creación del objeto Empresa:
+     Empresa empresa_e1 = new Empresa("123", "empresa1");
+     Empresa empresa_e2 = new Empresa("1234", "empresa2");
+
+     // Creación de los objetos para Empleado2:
+     Empleado2 e1 = new Empleado2("12345678A","Samuel",21,Departamento.Informática, true, empresa_e1);
+     Empleado2 e2 = new Empleado2("12345678B","Manuel",21,Departamento.Contabilidad, true, empresa_e2);
+     
+    System.out.println("El sueldo del empleado " + e1.getNombre() + " es: " + e1.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2005) + " años.");
+    System.out.println("El sueldo del empleado " + e2.getNombre() + " es: " + e2.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2016) + " años."); 
+    System.out.println("");
+    
+    Empleado2.setSalario_Base(2000);
+    
+    System.out.println("");
+    System.out.println("El sueldo del empleado " + e1.getNombre() + " es: " + e1.Calcular_Sueldo());
+    System.out.println("El sueldo del empleado " + e2.getNombre() + " es: " + e2.Calcular_Sueldo());
+    System.out.println("");
+    
+    // Resumen Informativo:
+    System.out.println(e1.toString() + empresa_e1.toString());
+    System.out.println(e2.toString() + empresa_e2.toString()); 
+    
+     
+     }  catch (IllegalArgumentException e) {
+         System.out.println(e.getMessage());
+     } 
+ 
+    }  
+}
+ 
+} // Cierre de la clase "Empleado2".
+    

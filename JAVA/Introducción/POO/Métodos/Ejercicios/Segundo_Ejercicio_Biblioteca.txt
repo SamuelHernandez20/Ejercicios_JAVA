@@ -1,0 +1,167 @@
+-- Primer archivo:
+
+public class libro {
+   
+  private int ISBN;
+  private String titulo;
+  private int numero_paginas;
+  private String autor;
+  private boolean prestado;
+
+   public libro() {
+    this(0,"",0,"",false);
+   }
+    
+    public libro(int ISBN, String titulo, int numero_paginas, String autor, boolean prestado) {
+        this.ISBN = ISBN;
+        this.titulo = titulo;
+        this.numero_paginas = numero_paginas;
+        this.autor = autor;
+        this.prestado = prestado;
+    }
+
+    public int getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getNumero_paginas() {
+        return numero_paginas;
+    }
+
+    public void setNumero_paginas(int numero_paginas) {
+        this.numero_paginas = numero_paginas;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public boolean isPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+    
+    // Metodos prestar, devolver o imprimir:
+    
+     public void prestar() {
+         
+        if (this.isPrestado()){
+            System.out.println("El libro " + this.getTitulo() + " ya se encuentra prestado.");
+        } else {
+            this.prestado = true;
+            System.out.println("Acabas de prestar el libro " + this.getTitulo());
+        }   
+    }
+     
+      public void devolver() {
+         
+        if (this.isPrestado()){
+            this.prestado = false;
+            System.out.println("El libro: " + this.getTitulo() + " ya no se encuentra prestado.");  
+        } else {
+            System.out.println("El libro: " +  this.getTitulo() + " ya se encuentra devuelto.");
+        }   
+    }
+      
+     public double imprimir(double coste) {
+     return coste * this.getNumero_paginas();
+     }
+     
+     // Creación de método ToString para personalizar mensajes:
+
+    @Override
+    public String toString() {
+        
+      String mensaje = "El Libro " + this.getISBN() + " con título " + this.getTitulo() + " y autor " + this.getAutor() + " tiene " + this.getNumero_paginas();  
+        
+      if(this.isPrestado()) {
+        mensaje += " páginas y está prestado ";
+        
+    } else {
+        mensaje += " páginas y no está prestado ";
+    }
+        
+        return mensaje;
+    }
+
+    // Comprobación de si los ISBN son iguales:
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.ISBN;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final libro other = (libro) obj;
+        return this.ISBN == other.ISBN;
+    }
+     
+  
+}
+
+
+-- Segundo archivo:
+
+public class Objeto {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    
+     // Creación de objetos para empleado:
+      libro l1 = new libro(1, "libro1", 1000, "Manolo",true);
+      libro l2 = new libro(2, "libro2", 2000, "Pepe",false);
+    
+      if(l1.equals(l2)){
+         System.out.println("Los libros son iguales, tienen el mismo ISBN");
+       
+      } else {
+          
+      // Comprobación de los métodos para prestar el libro:
+      l1.prestar();
+      System.out.println("");
+      
+      // Comprobación de los métodos para devolver el libro:
+      l2.devolver();
+      
+      System.out.println("");
+      System.out.println(l1.toString() + "su coste es: " + l1.imprimir(0.01));
+      System.out.println(l2.toString() + "su coste es: " + l2.imprimir(0.01));
+      
+      }
+          
+    }
+    
+}

@@ -1,0 +1,158 @@
+La idea de los Métodos Estáticos es representar valores/funciones de uso global y que no sea particular de una instancia (objeto).
+Suelen emplearse para realizar operaciones comunes a todos los objetos de la clase. No afectan a los estados de los mismos (a los valores de sus variables de instancia).
+Ejemplo, si se necesita un método para contabilizar el número de objetos creados de una clase, tiene sentido que sea estático ya que su función 
+(aumentar el valor de una variable entera) se realizaría independientemente del objeto empleado para invocarle. Ejemplo: contador_Universal.
+
+- Para llamar a un Método Estático basta con poner la clase sin crear el objeto previamente.
+- También es bueno utilizar clases separadas para validaciones y luego llamarlas en la clase principal.
+
+
+public class Persona {
+    
+    // Definir Atributos:
+    
+    // Definición de Atributo Estático:
+    private static int personasCreadas = 0;
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    
+    
+    // Definir Constructor vacío para asignar valores por defecto a las variables:
+    
+      public Persona () {
+         this.nombre = "";
+         this.apellido1 = "";
+         this.apellido2 = "";
+         this.edad = 0;}
+      
+     // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+       public Persona (String nombre, String apellido1, String apellido2, int edad){
+       
+        // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+         this.nombre = nombre;
+         this.apellido1 = apellido1;
+         this.apellido2 = apellido2;
+         this.edad = edad;
+         // Cada vez que se crea un objeto Persona se incrementa el contador. 
+         personasCreadas++;
+         System.out.println("Número de personas creadas: " + Persona.personasCreadas);
+         
+         // Aquí se podría hacer uso del método de validación de edad definido en la clase "ValidarEdadPersona":
+         if (!ValidarEdadPersona.validar_edad(edad)) {
+         throw new IllegalArgumentException("La edad debe estar dentro del rango. [0-99]"); 
+         } 
+       } 
+       
+   // Métodos: Getters y Setters:
+       
+      // El método get solo se encarga de obtener el valor del atributo. 
+       public String get_Nombre(){
+       return this.nombre;
+       }
+       
+        // El método set se encarga de obtener y modificar el valor del atributo. 
+      public void set_Nombre(String nombre){
+       this.nombre = nombre;
+       }
+
+    public String getApellido1() {
+        return this.apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return this.apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public int getEdad() {
+        return this.edad;
+    }
+
+    public void setEdad(int edad) {
+        // En este método tambié se define esta condición para que no se pueda establecer una edad menor a 0.
+       if (!ValidarEdadPersona.validar_edad(edad)) {
+         throw new IllegalArgumentException("La edad debe estar dentro del rango. [0-99]"); 
+         
+         } 
+        this.edad = edad;
+    }
+
+    
+    // Creo un método getter para el atributo estático creado en la clase.
+    // Al ser estático, para llamarlo se usa el nombre de la clase.
+    public static int getPersonasCreadas() {
+        return personasCreadas;
+    }
+    
+    // -- Métodos: ---
+    
+    // Creación de método para devolver el Nombre Completo:
+    
+    public String NombreCompleto() {
+        return this.nombre + " " + this.apellido1 + " " + this.apellido2;
+    }
+    
+    public boolean mayorEdad() {
+    return edad >= 18;
+    
+    }
+   
+}
+
+
+-- Segundo archivo:
+
+
+public class POO {
+
+    public static void main(String[] args) {
+       
+        // Ambos tienen el mismo valor (0). Actúa como un contador universal:
+        System.out.println("Valor para ambos objetos: " + Persona.getPersonasCreadas());
+
+        try {   
+        // Objeto de tipo Persona
+        Persona p = new Persona("Samuel", "Hernandez", "Santisteban", -1);
+        Persona p2 = new Persona("Mamuel", "Hernandez", "Santisteban", 100);
+        
+        // Se llaman a los métodos para mostrar el nombre completo de las dos personas:
+        System.out.println("El nombre completo es: " + p.NombreCompleto());
+        System.out.println("El nombre completo es: " + p2.NombreCompleto());
+        
+        if (p.mayorEdad() && p2.mayorEdad()){
+            System.out.println(p.get_Nombre() + " es mayor de edad, tiene: " + p.getEdad());
+            System.out.println(p.get_Nombre() + " es mayor de edad, tiene: " + p2.getEdad());
+        } else {
+            System.out.println(p.get_Nombre() + " es menor de edad, tiene: " + p.getEdad());
+            System.out.println(p2.get_Nombre() + " es menor de edad, tiene: " + p.getEdad());
+        }
+       
+        } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+        
+    }
+}
+
+-- Archivo con la clase de validación que contiene un Método Estático para validar la edad:
+
+
+public class ValidarEdadPersona {
+    
+     public static boolean validar_edad(int edad) {
+        return edad > 0 && edad <= 99;
+    }
+ 
+}
+
+

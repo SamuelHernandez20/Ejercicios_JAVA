@@ -1,0 +1,48 @@
+A los enumerados avanzados se le puede agregr lógica de programación orientada a objetos.
+
+-- Primer archivo con un enumerado que contiene los meses del año y los días asociados. 
+   Mas abajo un constructor con los días y un método get para obtenerlos en el segundo archivo:
+
+public enum Meses {
+  ENERO(31),
+  FEBRERO(28),
+  MARZO (31),
+  ABRIL (30),
+  MAYO (31),
+  JUNIO (30),
+  JULIO (31),
+  AGOSTO (31),
+  SEPTIEMBRE (30),
+  OCTUBRE (31),
+  NOVIEMBRE (30),
+  DICIEMBRE (31);  
+    
+  private int dias;  
+  
+// El modificador de acceso del constructor siempre debe de ser privado:
+    private Meses(int dias) {
+        this.dias = dias;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+ 
+}
+
+-- Segundo archivo:
+
+public class main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+  for (Meses value : Meses.values()) {
+      System.out.println("El Mes: " + value.name() + " Tiene: " + value.getDias() + " Días");
+   } 
+       
+    }
+    
+}

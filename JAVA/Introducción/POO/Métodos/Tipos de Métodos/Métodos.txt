@@ -1,0 +1,107 @@
+Los métodos getters y setters nos permiten modificar el valor de los atributos de una clase.
+Nos permiten seguir estableciendo un mayor control para aquello que no queremos que se modifique.
+
+Primer archivo donde está la clase, constructor y métodos:
+
+
+public class Persona {
+    
+    // Definir Atributos:
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    
+    
+    // Definir Constructor vacío para asignar valores por defecto a las variables:
+    
+      public Persona () {
+         this.nombre = "";
+         this.apellido1 = "";
+         this.apellido2 = "";
+         this.edad = 0;}
+      
+     // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+       public Persona (String nombre, String apellido1, String apellido2, int edad){
+       
+        // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+         this.nombre = nombre;
+         this.apellido1 = apellido1;
+         this.apellido2 = apellido2;
+         this.edad = edad;
+         
+         if (edad < 0) {
+         throw new IllegalArgumentException("La edad no puede ser negativa."); 
+         
+         } 
+       } 
+       
+   // Métodos: Getters y Setters:
+       
+      // El método get solo se encarga de obtener el valor del atributo. 
+       public String get_Nombre(){
+       return this.nombre;
+       }
+       
+        // El método set se encarga de obtener y modificar el valor del atributo. 
+      public void set_Nombre(String nombre){
+       this.nombre = nombre;
+       }
+
+    public String getApellido1() {
+        return this.apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return this.apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public int getEdad() {
+        return this.edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+            
+}
+
+
+Segundo archivo donde está creado el objeto:
+
+public class POO {
+
+    public static void main(String[] args) {
+       
+        try {   
+        // Objeto de tipo Persona
+        Persona p = new Persona("Samuel", "Hernandez", "Santisteban", 21);
+        
+        // Se llama al método get para obtener el nombre:
+        System.out.println("El nombre es: " + p.get_Nombre());
+        System.out.println("El primer apellido es: " + p.getApellido1());
+        System.out.println("El segundo apellido es: " + p.getApellido2());
+        System.out.println("La edad antigua es: " + p.getEdad());
+        
+        // Se modifica la edad con el método set correspondiente:
+        p.setEdad(22);
+        System.out.println("La edad nueva es: " + p.getEdad());    
+        
+        } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+      
+    }
+}
+
+
+

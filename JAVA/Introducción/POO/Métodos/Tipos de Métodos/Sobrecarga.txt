@@ -1,0 +1,125 @@
+La sobrecarga es una técnica que permite llamar a un mismo método o constructor varias
+veces pero con distintos parámetros. En este ejercicio hago un ejemplo empleando sobrecarga de información
+para el título del empleado, y a parte, se ve como simplificar la inicializacion de valores por defecto de un constructor:
+
+primer archivo:
+
+
+public class Empleado {
+    
+   // Definir Atributos:
+    private int id;
+    private String nombre;
+    private double salario;
+    private String departamento;
+
+    // Creación de Constructor vacío con valores por defecto de forma simplificada:
+    public Empleado() {
+     this(0,"",0.0,"");
+    }
+    // Creación de Constructor completo:
+    public Empleado(int id, String nombre, double salario, String departamento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.salario = salario;
+        this.departamento = departamento;
+        
+        if (this.salario < 1000){
+         throw new IllegalArgumentException("El salario mínimo deben de ser 1000 euros."); 
+        }
+    }
+    
+    // ## Métodos ##
+
+    // Creación de Método para mostrar información completa del empleado:
+    
+    public String MostrarInformación() {
+        return this.nombre + " " + this.departamento + " " + this.salario;
+    }
+    
+    // Aquí se comprueba el uso del método toString para devolver info de la clase:
+
+    @Override
+    public String toString() {
+        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", salario=" + salario + ", departamento=" + departamento + '}';
+    }
+   
+    // Se emplea una pequeña sobrecarga para añadir información adicional:
+    
+     public String MostrarInformación(String titulo) {
+        return titulo + " " + this.nombre + " " + this.departamento + " " + this.salario;
+    }
+    
+    // Creación de Método para calcular la bonificación dependiendo del salario:
+    
+     public double CalcularBonificación() {
+         
+        // Evaluar el salario introducido:
+        
+       if (this.salario < 2000) {
+           return this.salario * 0.15;
+     
+       }  else if (this.salario > 5000) {
+           return this.salario * 0.5;
+     
+       } else if (this.salario >= 2000 && this.salario <= 5000) {
+           return this.salario * 0.10;
+       } 
+        return 0;
+        
+    }
+    
+}
+
+Segundo archivo donde está el objeto:
+
+
+public class Objeto {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+         try {  
+             
+        // Creación de objetos para empleado:
+        Empleado e1 = new Empleado(1, "Samuel", 1000, "Técnico");
+        Empleado e2 = new Empleado(2, "Manuel", 2000, "Técnico");
+        Empleado e3 = new Empleado(3, "Paco", 3000, "Técnico");
+        Empleado e4 = new Empleado(4, "Jorge", 1000, "Técnico");
+        
+        
+         // Se llama al método para mostrar la información completa de cada empleado:
+        System.out.println("Mostrando la información completa de los empleados:");
+        System.out.println("");
+        
+        System.out.println(e1.MostrarInformación() + " su bonificación es: " + e1.CalcularBonificación());
+        System.out.println(e2.MostrarInformación() + " su bonificación es: " + e2.CalcularBonificación());
+        System.out.println(e3.MostrarInformación() + " su bonificación es: " + e3.CalcularBonificación());
+        System.out.println(e4.MostrarInformación() + " su bonificación es: " + e4.CalcularBonificación());
+        
+        // Llamar al método toString para el primer empleado para comprobar como su funcionamiento:
+        
+        System.out.println(e1.toString());
+        
+        System.out.println("");
+        
+        // Utilizo la sobre carga de métodos por ejemplo para el primer y el tercero:
+        System.out.println(e1.MostrarInformación("Señor"));
+        System.out.println(e3.MostrarInformación("Señor"));
+        
+       
+        
+        } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+        
+    }
+    
+}
+
+
+
+

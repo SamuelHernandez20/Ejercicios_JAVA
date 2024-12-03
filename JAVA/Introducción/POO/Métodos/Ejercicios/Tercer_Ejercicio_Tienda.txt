@@ -1,0 +1,275 @@
+-- Primer Archivo.
+
+public class Ordenador {
+    
+  private String Marca;
+  private String Modelo;
+  private int GB_RAM;
+  private int Capacidad_Disco;
+  private int Espacio_Usado;
+  private boolean ON_OFF; 
+
+
+  // Constructor vacío inicializando los atributos con valores por defecto:
+    public Ordenador() {
+        this("","",4,50);
+    }
+   
+  // Constructor para la memoria RAM:  
+    public Ordenador(int GB_RAM) {
+        this("","",GB_RAM,50);
+    }
+
+  // Constructor para los atributos de memoria RAM y Capacidad de Disco:  
+    public Ordenador(int GB_RAM, int Capacidad_Disco) {
+       this("","",GB_RAM,Capacidad_Disco);
+    }
+      
+  // Constructor con todos los atributos menos el espacio usado y el ON/OFF:
+    public Ordenador(String Marca, String Modelo, int GB_RAM, int Capacidad_Disco){
+        
+        if (!EsPotenciaDeDos(GB_RAM)){
+         throw new IllegalArgumentException("El Valor para los GB de RAM debe ser potencia de 2.");
+        } 
+        this.Marca = Marca;
+        this.Modelo = Modelo;
+        this.GB_RAM = GB_RAM;
+        this.Capacidad_Disco = Capacidad_Disco;
+    }
+    
+    // Método para determinar si la memoria RAM es un potencia de dos:
+     public boolean EsPotenciaDeDos (int a) {
+      
+     // Si "a" es un número negativo se retorna falso porque las potencias de dos son positivas:
+     if (a <= 0) {
+       return false; 
+    } else {
+     // Esta es una operacion eficiente a nivel de bits para verificar 
+     // si el número tiene exactamente un único bit activado en su representación:
+       return (a & (a - 1)) == 0;
+     } 
+    }
+
+    public String getMarca() {
+        return Marca;
+    }
+
+    public void setMarca(String Marca) {
+        this.Marca = Marca;
+    }
+
+    public String getModelo() {
+        return Modelo;
+    }
+
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
+    }
+
+    public int getGB_RAM() {
+        return GB_RAM;
+    }
+
+    public void setGB_RAM(int GB_RAM) {
+        this.GB_RAM = GB_RAM;
+    }
+
+    public int getCapacidad_Disco() {
+        return Capacidad_Disco;
+    }
+
+    public void setCapacidad_Disco(int Capacidad_Disco) {
+        this.Capacidad_Disco = Capacidad_Disco;
+    }
+
+    public int getEspacio_Usado() {
+        return Espacio_Usado;
+    }
+
+    public void setEspacio_Usado(int Espacio_Usado) {
+        this.Espacio_Usado = Espacio_Usado;
+    }
+
+    public boolean isON_OFF() {
+        return ON_OFF;
+    }
+
+    public void setON_OFF(boolean ON_OFF) {
+        this.ON_OFF = ON_OFF;
+    }
+    
+  // Métodos para las operaciones:
+   
+  // Operación para Encender el Ordenador:
+    public void encender() {
+         
+        if (this.ON_OFF){
+            System.out.println("El Ordenador ya está encendido");
+        } else {
+            this.ON_OFF = true;
+            System.out.println("Acabas de encender el ordenador.");
+        }
+        } 
+    
+     // Operación para Apagar el Ordenador:
+    public void apagar () {
+        if (!this.ON_OFF){
+            System.out.println("El Ordenador ya está apagado");
+        } else {
+            this.ON_OFF = false;
+            System.out.println("Acabas de apagar el ordenador.");
+        }
+        } 
+    
+    // Operación para Transferir Archivos:
+     public void TransferirArchivos (int NUM_GB_AGREGAR) {
+        
+        if (NUM_GB_AGREGAR > 0) {
+        
+          if (this.ON_OFF){
+          int total_espacio = this.Espacio_Usado + NUM_GB_AGREGAR;
+          
+          if (this.Capacidad_Disco < total_espacio){
+              System.out.println("Los Archivos a Transferir superan la capacidad del disco duro.");
+          
+          } else {
+            System.out.println("Se han agregado " + NUM_GB_AGREGAR + " GB a los " + this.Espacio_Usado + " GB usados.");
+            
+            System.out.println("Total = " + total_espacio);
+        }
+          }  else {
+             System.out.println("El ordenador está apagado. Debes encenderlo para realizar la Transferencia de Archivos."); 
+        
+          }
+        } else {
+            System.out.println("La cantidad de GB a Agregar debe ser mayor a 0.");
+         }
+     }
+     
+     // Operación para Eliminar Archivos:
+     public void EliminarArchivos (int NUM_GB_ELIMINAR) {
+        
+        if (NUM_GB_ELIMINAR > 0) {
+         
+         if (this.ON_OFF){
+            int total_espacio = this.Espacio_Usado - NUM_GB_ELIMINAR;
+             System.out.println("Se han eliminado " + NUM_GB_ELIMINAR + " GB a los " + this.Espacio_Usado + " GB usados. Total = " + total_espacio);
+               
+        } else if(NUM_GB_ELIMINAR > this.Espacio_Usado) {
+             System.out.println("El número de GB a Eliminar excede el Espacio Usado.");
+             this.Espacio_Usado = 0;
+           }
+         
+         else {
+             System.out.println("El ordenador está apagado. Debes encenderlo para realizar la Eliminación de Archivos.");      
+         }
+        
+        } else {
+            System.out.println("La cantidad de GB a Eliminar debe ser mayor a 0.");
+         } 
+     }
+    
+  // Un ordenador será igual a otro cuando tengan la misma "Marca" & "Modelo":
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.Marca);
+        hash = 67 * hash + Objects.hashCode(this.Modelo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ordenador other = (Ordenador) obj;
+        if (!Objects.equals(this.Marca, other.Marca)) {
+            return false;
+        }
+        return Objects.equals(this.Modelo, other.Modelo);
+    }
+     
+    // Formatear la Salida con ToString:
+
+    @Override
+    public String toString() {
+         String mensaje = "La Marca es: " + this.Marca + ", su Modelo: " + this.Modelo + ", Cantidad de RAM: " + this.GB_RAM + ", su Capacidad Disco: " + this.Capacidad_Disco + ", el Espacio Usado es: " + this.Espacio_Usado;  
+        
+         if(this.isON_OFF()) {
+        mensaje += ", y el ordenador esta encendido";
+        
+    } else {
+        mensaje += ", y el ordenador esta apagado";
+    }
+         return mensaje;
+    }
+    
+}
+
+-- Segundo Archivo:
+
+
+public class Objeto {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+      // Creación de objetos para los ordenadores:
+      
+      try { 
+      Ordenador o = new Ordenador("Marca","Modelo",4, 50);
+      Ordenador o2 = new Ordenador("Marca2","Modelo2",4, 50);
+    
+      if(o.equals(o2)) {
+       System.out.println("Los Ordenadores son iguales. Tienen la misma Marca y Modelo");
+      } else {
+          
+      // Enciendo el Ordenador:
+      o.encender();
+      o.encender();
+      
+      System.out.println("");
+     
+     // Establecer el Espacio Usado:
+     o.setEspacio_Usado(30);
+     
+     // Obtener el Espacio Usado:
+     o.getEspacio_Usado();
+      
+     // Realizo una Transferencia de 10 Archivos:
+      o.TransferirArchivos(20);
+      
+     // Realizo una Eliminación de Archivos: 
+     o.EliminarArchivos(10);
+     
+     System.out.println("");
+     
+     // Mostrar Resumen Informativo:
+     System.out.println("Resumen Informativo: ");
+     System.out.println(o.toString());
+     
+     System.out.println("");
+    
+     // Después de realizar las operaciones apago el Ordenador:
+     o.apagar();
+     o.apagar();
+
+      }
+     } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+        
+    }
+    
+}
