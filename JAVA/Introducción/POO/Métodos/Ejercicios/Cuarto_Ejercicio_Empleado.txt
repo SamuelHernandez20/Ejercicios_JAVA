@@ -129,25 +129,20 @@ public class Empleado2 {
     }
     
     // Método Calcular_Antiguedad() para retornar los años que lleva en esa empresa:
-    public int Calcular_Antiguedad(int Año_Ingreso) throws Exception{
+    public int Calcular_Antiguedad(int Año_Ingreso) {
         
     LocalDateTime hoy = LocalDateTime.now();
     int año_actual = hoy.getYear();
     int año_ingreso = Año_Ingreso;
     
-    if (año_ingreso <= 0) {
-      throw new Exception("El año de ingreso no puede tener un valor cero o negativo.");
-   } else {
-       if (año_actual < año_ingreso) {
-      throw new Exception("El año de ingreso no puede ser mayor al actual");
+     if ( año_ingreso <= 0 || año_actual < año_ingreso) {
+      throw new IllegalArgumentException("Año de Ingreso Inválido.");
     }
-    } 
     return año_actual - año_ingreso;
     
     } 
-
-   // Un empleado será igual a otro cuando tienen el mismo DNI:
     
+   // Un empleado será igual a otro cuando tienen el mismo DNI:
     @Override
     public int hashCode() {
         int hash = 3;
