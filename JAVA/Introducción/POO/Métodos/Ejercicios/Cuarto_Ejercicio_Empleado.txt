@@ -1,17 +1,5 @@
-Primer archivo: Clase "Empleado2"
+-- Primer archivo: Clase "Empleado2"
 
-
-package Empresa2;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-/**
- *
- * @author Samuel
- */
 public class Empleado2 {
 
 // Definición de los atributos:
@@ -25,7 +13,7 @@ public class Empleado2 {
     
 // Definición de atributo estático para el salario base:    
     private static double Salario_Base = 900;
-    
+   
 // Encapsulamiento de todos los atributos:
 
     public String getDni() {
@@ -76,7 +64,7 @@ public class Empleado2 {
         this.empresa = empresa;
     }
 
-   // Aquí deben de ponerse como estáticos por el tipo de atributo: 
+   // Método Get estático para el salario base (atributo estático): 
     public static double getSalario_Base() {
         return Salario_Base;
     }
@@ -84,7 +72,7 @@ public class Empleado2 {
     public static void setSalario_Base(double Salario_Base) {
         Empleado2.Salario_Base = Salario_Base;
     }
-
+    
     // Creación de Constructor por Defecto:
     public Empleado2(String Dni, String Nombre, int Edad, Departamento departamento, boolean Teletrabajo, Empresa empresa) {
         
@@ -101,7 +89,7 @@ public class Empleado2 {
         if (empresa == null) {
             throw new IllegalArgumentException("La Empresa es obligatoria.");
         }
-
+        
         this.Dni = Dni;
         this.Nombre = Nombre;
         this.Edad = Edad;
@@ -134,12 +122,12 @@ public class Empleado2 {
     LocalDateTime hoy = LocalDateTime.now();
     int año_actual = hoy.getYear();
     int año_ingreso = Año_Ingreso;
+    final boolean ANTIGUEDAD = año_ingreso <= 0 || año_actual < año_ingreso;
     
-     if ( año_ingreso <= 0 || año_actual < año_ingreso) {
-      throw new IllegalArgumentException("Año de Ingreso Inválido.");
+     if (ANTIGUEDAD) {
+      throw new IllegalArgumentException("Año de Ingreso a la Empresa Inválido.");
     }
-    return año_actual - año_ingreso;
-    
+      return año_actual - año_ingreso;
     } 
     
    // Un empleado será igual a otro cuando tienen el mismo DNI:
@@ -169,20 +157,19 @@ public class Empleado2 {
     @Override
     public String toString() {
         
-        String mensaje = "El Dni es:" + Dni + ", Nombre:" + Nombre + ", Edad:" + Edad + ", pertenece al Departamento: " 
-                          + departamento + ", su Empresa: " + empresa + ", ¿teletrabaja?";  
+        String mensaje = "El Dni es: " + Dni + "\n" + "Edad: " + Edad + "\nDepartamento: " 
+        + departamento + "\nDatos de la Empresa: \n" + empresa + "\n¿teletrabaja?";  
         
         if(!this.isTeletrabajo()) {
             mensaje += " No.";
         } else {
             mensaje += " Si.";  
         }
-        
         return mensaje;
     }
           
-} // Cierre de la clase "Empleado2".
-    
+} // Cierre de la clase: "Empleado2".
+
      
 -- Segundo archivo: Enumerado con los Departamentos:
 
@@ -244,10 +231,8 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "El Cif de la empresa es: " + Cif + ", y su Nombre: " + nombre + ".";
-    }
-    
-     
+        return "- Cif: " + Cif + "\n- Nombre: " + nombre + ".";
+    }    
 }
 
 -- Cuarto archivo: Método para validar el DNI
@@ -270,34 +255,41 @@ public class Objeto {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
      
      try {  
      // Creación del objeto Empresa:
      Empresa empresa_e1 = new Empresa("123", "empresa1");
      Empresa empresa_e2 = new Empresa("1234", "empresa2");
-
+     
      // Creación de los objetos para Empleado2:
      Empleado2 e1 = new Empleado2("12345678A","Samuel",21,Departamento.Informática, true, empresa_e1);
      Empleado2 e2 = new Empleado2("12345678B","Manuel",21,Departamento.Contabilidad, true, empresa_e2);
-     
-    System.out.println("El sueldo del empleado " + e1.getNombre() + " es: " + e1.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2005) + " años.");
-    System.out.println("El sueldo del empleado " + e2.getNombre() + " es: " + e2.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2016) + " años."); 
-    System.out.println("");
-    
-    Empleado2.setSalario_Base(2000);
-    
-    System.out.println("");
-    System.out.println("El sueldo del empleado " + e1.getNombre() + " es: " + e1.Calcular_Sueldo());
-    System.out.println("El sueldo del empleado " + e2.getNombre() + " es: " + e2.Calcular_Sueldo());
-    System.out.println("");
+
+    // Evaluar si un empleado es igual a otro:
+    if (!e1.equals(e2)) {
     
     // Resumen Informativo:
-    System.out.println(e1.toString() + empresa_e1.toString());
-    System.out.println(e2.toString() + empresa_e2.toString()); 
+    System.out.println("###########################################");
+    System.out.println("#         DATOS DE LOS EMPLEADOS          #");
+    System.out.println("###########################################");   
+    System.out.println("");
     
-     
-     }  catch (IllegalArgumentException e) {
+    System.out.println("1. Empleado: " + e1.getNombre() + ", Sueldo: " + e1.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2035) + " años.");
+    System.out.println("");
+    System.out.println(e1.toString());
+    System.out.println("");
+    
+    System.out.println("2. Empleado: " + e2.getNombre() + ", Sueldo: " + e2.Calcular_Sueldo() + ". Antiguedad: " + e1.Calcular_Antiguedad(2026) + " años."); 
+    System.out.println("");
+    System.out.println(e2.toString());
+
+    } else {
+    throw new IllegalArgumentException("Los empleados son iguales. Tienen el mismo DNI.");    
+
+    }
+
+    }  catch (IllegalArgumentException e) {
          System.out.println(e.getMessage());
      } 
  
