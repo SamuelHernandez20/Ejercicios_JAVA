@@ -1,0 +1,179 @@
+¿Qué es el Polimorfismo? Una función que tiene el mismo nombre, pero que en distintas clases realiza acciones diferentes.
+
+
+Para este Ejemplo se añade un función de sueldo en la clase Padre "Persona" que luego es reutilizada por la clase "Empleado"
+para modificar ciertas acciones.
+
+Archivo 1, Persona con el método sueldo()
+
+public class Persona {
+
+    // Definir Atributos:
+    // Definición de Atributo Estático:
+    private static int personasCreadas = 0;
+
+    // Usar atributo que es un objeto de la clase "Dirección":
+    private Dirección direccion;
+
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+
+    // Definir Constructor vacío para asignar valores por defecto a las variables:
+    public Persona() {
+        this.nombre = "";
+        this.apellido1 = "";
+        this.apellido2 = "";
+        this.edad = 0;
+        new Dirección();
+    }
+
+    // Este Segundo Constructor no tendrá la dirección:
+    public Persona(String nombre, String apellido1, String apellido2, int edad) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.edad = edad;
+    }
+
+    // Definir Constructor por defecto (todos los atributos) para inicialziar los atributos privados.
+    public Persona(String nombre, String apellido1, String apellido2, int edad, Dirección direccion) {
+
+        // Validar que el atributo-objeto de la dirección no esté vacío:
+        if (direccion == null) {
+            throw new IllegalArgumentException("La Dirección no puede estar vacía.");
+        }
+
+        // Aquí se podría hacer uso del método de validación de edad definido en la clase "ValidarEdadPersona":
+        if (!ValidarEdadPersona.validar_edad(edad)) {
+            throw new IllegalArgumentException("La edad debe estar dentro del rango. [0-99]");
+        }
+
+        // "this" sirve para hacer referencia a los atributos de la clase e inicalizarlo con el valor de cada variable. 
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.edad = edad;
+        this.direccion = direccion;
+
+        // Cada vez que se crea un objeto Persona se incrementa el contador. 
+        personasCreadas++;
+        System.out.println("Número de personas creadas: " + Persona.personasCreadas);
+
+    }
+
+    // Métodos: Getters y Setters:
+    // El método get solo se encarga de obtener el valor del atributo. 
+    public String get_Nombre() {
+        return this.nombre;
+    }
+
+    // El método set se encarga de obtener y modificar el valor del atributo. 
+    public void set_Nombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido1() {
+        return this.apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return this.apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public int getEdad() {
+        return this.edad;
+    }
+
+    public void setEdad(int edad) {
+        // En este método tambié se define esta condición para que no se pueda establecer una edad menor a 0.
+        if (!ValidarEdadPersona.validar_edad(edad)) {
+            throw new IllegalArgumentException("La edad debe estar dentro del rango. [0-99]");
+
+        }
+        this.edad = edad;
+    }
+
+    // Creo un Método Get para el atributo estático creado en la clase.
+    // Al ser estático, para llamarlo se usa el nombre de la clase.
+    public static int getPersonasCreadas() {
+        return personasCreadas;
+    }
+
+    // Creación de Método que usare en las subclases "Empleado" para ilustrar el Polimorfismo:
+    public double sueldo() {
+        return 0;
+    }
+
+    // Creo un Método Get para obtener la información formateada desde la clase "Dirección"
+    // para el objeto que ha sido definido como atributo en la clase "Persona":
+    public Dirección getDireccion() {
+        return direccion;
+    }
+
+    // -- Métodos: ---
+    // Creación de método para devolver el Nombre Completo:
+    public String NombreCompleto() {
+        return this.nombre + " " + this.apellido1 + " " + this.apellido2;
+    }
+
+    public boolean mayorEdad() {
+        return edad >= 18;
+
+    }
+
+}
+
+
+-- Archivo 2, subclase Empleado que modifica el Método del Padre Persona (Polimorfismo)
+
+
+// Esta es una subclase "Empleado" que hereda de la clase Padre "Persona"
+public class Empleado extends Persona {
+
+// A parte de los atributos heredados, se agrega uno adicional:
+    private double salario;
+
+// Creación de Constructor por Defecto junto con atributos del padre:
+    public Empleado(double salario, String nombre, String apellido1, String apellido2, int edad) {
+        // En vez de "this", para los atributos de la clase padre se hace referencia con "super":
+        super(nombre, apellido1, apellido2, edad);
+        this.salario = salario;
+    }
+
+    // Creación de Métodos Getters y Setters para la subclase Empleado:
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    // Método sueldo() con el mismo nombre que el método de la clase padre Persona, cambiando ciertas acciones (Polimorfismo)
+    // Con el @Override le indico que estoy sobreescribiendo el método sueldo() del padre.
+    @Override
+    public double sueldo() {
+
+        if (super.getEdad() >= 18) {
+            return this.salario + 500;
+        }
+            return this.salario;
+    }
+
+    // Creación de ToString() para mostrar los atributos de la clase Persona y la subclase Empleado:
+    @Override
+    public String toString() {
+        return "Nombre: " + super.NombreCompleto() + ", edad: " + super.getEdad() + ", salario: " + this.getSalario();
+    }
+
+}

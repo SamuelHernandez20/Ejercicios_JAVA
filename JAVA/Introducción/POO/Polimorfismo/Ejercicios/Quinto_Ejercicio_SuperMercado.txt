@@ -1,0 +1,252 @@
+-- Archivo 1: Clase Padre Producto
+
+public class Producto {
+    // Atributo Estático para generar el ID Autoincremental
+    static int generador = 1;
+    
+    private int id;
+    private String Nombre;
+    private double Precio;
+
+    // Creación de Constructor Vacío:
+    
+    public Producto() {
+        this.id = 0;
+        this.Nombre = "";
+        this.Precio = 0;
+    }
+
+    // Creación de Constructor para el "Nombre" y "Precio":
+    
+    public Producto(String Nombre, double Precio) {
+
+        if (this.Precio < 0) {
+            throw new IllegalArgumentException("El Precio del Producto debe de ser un valor Positivo.");
+        }
+        
+        this.Nombre = Nombre;
+        this.Precio = Precio;
+        // Identificador Autoincremental:
+        this.id = generador++;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public double getPrecio() {
+        return Precio;
+    }
+
+    public void setPrecio(double Precio) {
+
+        if (this.Precio < 0) {
+            throw new IllegalArgumentException("El Precio del Producto debe de ser un valor Positivo.");
+        }
+        this.Precio = Precio;
+    }
+    
+    // Operaciones: dada una cantidad de productos, indicar el precio total. 
+    
+      public double comprar(int cantidad) {  
+        return cantidad * this.getPrecio(); // Precio Total.
+    }
+
+} // Cierre de la clase Producto.
+
+
+-- Archivo 2: Subclase 1 ProductoFresco
+
+public class ProductoFresco extends Producto {
+
+    // A parte de los atributos heredados, se agrega uno adicional:
+    private int días_caducidad;
+
+    // Creación de Constructor Vacío: 
+    public ProductoFresco() {
+        super();
+        this.días_caducidad = 0;
+
+    }
+
+    // Creación de Constructor por Defecto:
+    public ProductoFresco(int días_caducidad, String Nombre, double Precio) {
+        super(Nombre, Precio);
+        this.días_caducidad = días_caducidad;
+
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public int getDías_caducidad() {
+        return días_caducidad;
+    }
+
+    public void setDías_caducidad(int días_caducidad) {
+
+        if (this.días_caducidad < 0) {
+            throw new IllegalArgumentException("Los días de caducidad se deben indicar como enteros positivos.");
+        }
+        this.días_caducidad = días_caducidad;
+    }
+
+    /* Operaciones: dada una cantidad de productos, indicar el precio total. 
+       Según los dias de caducidad que le queden, el precio se reducirá en los siguientes
+       porcentajes:
+    
+      #######################################################
+      # 1. Entre 3 y 5 días --> El precio se reduce un 40%. #
+      # 2. Menos de 3 días --> El precio se reduce un 70%.  #
+      #######################################################
+    
+     Método comprar() con el mismo nombre que el método de la clase padre Producto, cambiando ciertas acciones (Polimorfismo)
+     Con el @Override le indico que estoy sobreescribiendo el método comprar() del padre. */
+    
+    @Override
+    public double comprar(int cantidad) {
+
+        // - Bloque de declaración e inicialización de variables:
+        double Precio_Total = super.comprar(cantidad);
+        int caducidad = this.getDías_caducidad();
+        double descuento_calculo = 0;
+
+        // - Bloque de declaración e inicialización de constantes:
+        final double CUARENTA_POR_CIENTO = 0.4;
+        final double SETENTA_POR_CIENTO = 0.7;
+        final boolean RANGO_1 = caducidad >= 3 && caducidad <= 5;
+        final boolean RANGO_2 = caducidad >= 1 && caducidad <= 3;
+
+        if (RANGO_1) {
+            descuento_calculo = Precio_Total * CUARENTA_POR_CIENTO;
+            return Precio_Total - descuento_calculo;
+
+        } else if (RANGO_2) {
+            descuento_calculo = Precio_Total * SETENTA_POR_CIENTO;
+            return Precio_Total - descuento_calculo;
+        } else {
+            return Precio_Total; // Precio total sin descuento.
+
+        } // Cierre final del bloque if().
+
+    } // Cierre del Método comprar().
+
+    // Creación de ToString() para mostrar los atributos de la clase Producto y la subclase ProductoFresco:
+    @Override
+    public String toString() {
+        return "Identificador: " + super.getId() + " Nombre Producto Fresco: " + super.getNombre()
+                + " Precio: " + super.getPrecio() + " días de caducidad: " + this.getDías_caducidad();
+    }
+
+} // Cierre de la clase ProductoFresco.
+
+
+-- Archivo 3: Subclase 2 ProductoRefrigerado
+
+public class ProductoRefrigerado extends Producto {
+
+    // A parte de los atributos heredados, se agrega uno adicional:
+    private int cajon;
+
+    // Creación de Constructor Vacío:
+    public ProductoRefrigerado() {
+        super();
+        this.cajon = 0;
+    }
+
+    // Creación de Constructor por Defecto:
+    public ProductoRefrigerado(int cajon, String Nombre, double Precio) {
+
+        if (cajon < 0) {
+            throw new IllegalArgumentException("El número de cajón se debe expresar como un entero positivo.");
+        }
+        super(Nombre, Precio);
+        this.cajon = cajon;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public int getCajon() {
+        return cajon;
+    }
+
+    public void setCajon(int cajon) {
+
+        if (cajon < 0) {
+            throw new IllegalArgumentException("El número de cajón se debe expresar como un entero positivo.");
+        }
+        this.cajon = cajon;
+    }
+
+    // Creación de ToString() para mostrar los atributos de la clase Producto y la subclase ProductoFresco:
+    @Override
+    public String toString() {
+        return "Identificador: " + super.getId() + " Número de cajón: " + this.getCajon() + " Nombre Producto Refrigerado: "
+                + super.getNombre() + " Precio: " + super.getPrecio();
+    }
+
+}  // Cierre de la clase ProductoRefrigerado.
+
+
+-- Archivo 4, Salida de la Información
+
+public class Creación_Objetos {
+
+    public static void main(String[] args) {
+
+        try {
+
+            // Objetos de la clase padre: "Producto".
+            Producto pro = new Producto("Cereales", 7.15);
+            Producto pro2 = new Producto("Batido de Proteínas", 1.69);
+
+            // Objetos de la subclase: "ProductoFresco".
+            ProductoFresco profresco = new ProductoFresco(4, "Leche Entera", 1.07);
+            ProductoFresco profresco2 = new ProductoFresco(2, "Yogurt de Proteínas", 0.50);
+
+            // Objetos de la subclase: "ProductoRefrigerado".
+            ProductoRefrigerado prorefri = new ProductoRefrigerado(9, "Helado de Vainilla", 1.07);
+            ProductoRefrigerado prorefri2 = new ProductoRefrigerado(4, "Helado de Chocolate", 1.07);
+
+            // Impresión de la información de los productos:
+            
+            // - Clase "Producto":
+            System.out.println(pro.toString());
+            System.out.println(pro2.toString());
+            System.out.println("");
+
+            // - Subclase "ProductoFresco":
+            System.out.println(profresco.toString());
+            // Le indico la cantidad a comprar con descuento del 40%.
+            System.out.println("Días Caducidad: " + profresco.getDías_caducidad() + " Descuento: 40% " + " Precio Total: " + profresco.comprar(5)); // 3.21
+            System.out.println("");
+
+            System.out.println(profresco2.toString());
+            // Le indico la cantidad a comprar con descuento del 70%.
+            System.out.println("Días Caducidad: " + profresco2.getDías_caducidad() + " Descuento: 70% " + " Precio Total: " + profresco2.comprar(10)); // 1.5
+            System.out.println("");
+
+            // - Subclase "ProductoRefrigerado":
+            System.out.println(prorefri.toString());
+            System.out.println(prorefri2.toString());
+            System.out.println("");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+}
+

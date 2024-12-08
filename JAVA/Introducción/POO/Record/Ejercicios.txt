@@ -1,0 +1,317 @@
+"Record"en Java es una estructura superior al igual que lo son las clases, enums e interfaces, 
+por lo que la manera más habitual de crear un record es mediante un archivo .java. Este nos permite crear algo similar
+a una clase de manera rápida y simplificada. Una característica importante es que solo permite obtener atributos, no modificarlos.
+
+-- Ejemplo 1:
+
+public class Estructura_Record {
+
+    public static void main(String[] args) {
+       
+       // Definición de estrcutura record para "Persona"
+       record Persona(String nombre, String apellidos, int edad){}
+       
+       // Creación de objeto Persona:
+       Persona persona = new Persona("Samuel", "Hernández Santisteban", 21);
+       
+       // Devuelve su propio ToString()
+        System.out.println(persona.toString());
+        
+    }
+}
+
+-- Ejemplo 2, Inclusión de Métodos:
+
+
+public class Estructura_Record {
+
+    public static void main(String[] args) {
+
+        // Definición de estructura record para "Persona"
+        record Persona(String nombre, String apellidos, int edad) {
+
+            // Creación del Primer Método para concatenar el Nombre y los Apellidos:    
+            public String NombreCompleto() {
+                return this.nombre + " " + this.apellidos;
+            }
+
+            // Creación del Segundo Método para verificar si es mayor de Edad:
+            public boolean mayorEdad() {
+                return edad >= 18;
+
+            }
+
+        }
+
+        // Creación de objeto Persona:
+        Persona persona = new Persona("Samuel", "Hernández Santisteban", 21);
+
+        // Devuelve su propio ToString()
+        System.out.println(persona.toString());
+         
+        // Imprimir el Nombre Completo de la Persona:
+        System.out.println("Nombre Completo: " + persona.NombreCompleto() + ".");
+       
+        // Llamar al Método: mayorEdad(), evaluar si es mayor o no, e imprimir un mensaje indicándolo:
+        if (persona.mayorEdad()) {
+            System.out.println(persona.nombre + " Es Mayor de edad.");
+        } else {
+            System.out.println(persona.nombre + " Es Menor de edad.");
+
+        }
+
+    }
+}
+
+-- Ejemplo 3, Inclusión de Constructores:
+
+
+public class Estructura_Record {
+
+    public static void main(String[] args) {
+
+        // Definición de estructura record para "Persona"
+        record Persona(String nombre, String apellidos, int edad) {
+
+            // Creación de Constructor Vacío:
+            public Persona() {
+                this("", "", 0);
+            }
+
+            public Persona(String nombre) {
+                this(nombre, "", 0);
+            }
+
+            // Creación de un Constructor por Defecto:
+            public Persona(String nombre, String apellidos, int edad) {
+                this.nombre = nombre;
+                this.apellidos = apellidos;
+                this.edad = edad;
+            }
+
+            // Creación del Primer Método para concatenar el Nombre y los Apellidos:    
+            public String NombreCompleto() {
+                return this.nombre + " " + this.apellidos;
+            }
+
+            // Creación del Segundo Método para verificar si es mayor de Edad:
+            public boolean mayorEdad() {
+                return edad >= 18;
+
+            }
+        }
+
+        // Creación de objeto Persona (Constructor por Defecto):
+        Persona persona = new Persona("Samuel", "Hernández Santisteban", 21);
+        // Creación de objeto Persona (Constructor del Nombre):
+        Persona persona2 = new Persona("Samuel");
+
+        // Devuelve su propio ToString()
+        System.out.println(persona.toString());
+
+        // Imprimir el Nombre Completo de la primer Persona:
+        System.out.println("Nombre Completo: " + persona.NombreCompleto() + ".");
+
+        // Imprimir solo el Nombre de la segunda Persona:
+        System.out.println("Nombre: " + persona2.nombre() + ".");
+
+        // Llamar al Método: mayorEdad(), evaluar si es mayor o no, e imprimir un mensaje indicándolo:
+        if (persona.mayorEdad()) {
+            System.out.println(persona.nombre + " Es Mayor de edad.");
+        } else {
+            System.out.println(persona.nombre + " Es Menor de edad.");
+
+        }
+
+    }
+}
+
+
+-- Ejemplo 3, Inclusión de Atributos y Métodos Estáticos:
+
+
+public class Estructura_Record {
+
+    public static void main(String[] args) {
+
+        // Definición de estructura record para "Persona"
+        record Persona(String nombre, String apellidos, int edad) {
+
+            // Definición de Atributo Estático para las personas creadas:
+            private static int personasCreadas = 0;
+
+            // Creación de Constructor Vacío:
+            public Persona() {
+                this("", "", 0);
+            }
+
+            // Creación de Constructor para el Nombre:
+            public Persona(String nombre) {
+                this(nombre, "", 0);
+            }
+
+            // Creación de un Constructor por Defecto:
+            public Persona(String nombre, String apellidos, int edad) {
+                this.nombre = nombre;
+                this.apellidos = apellidos;
+                this.edad = edad;
+                personasCreadas++;
+            }
+
+            // Creación del Primer Método para concatenar el Nombre y los Apellidos:    
+            public String NombreCompleto() {
+                return this.nombre + " " + this.apellidos;
+            }
+
+            // Creación del Segundo Método para verificar si es mayor de Edad:
+            public boolean mayorEdad() {
+                return edad >= 18;
+
+            }
+
+            // Creación de Método Get Estático para las Personas Creadas:
+            public static int get_PersonasCreadas() {
+                return personasCreadas;
+            }
+        }
+
+        // Creación de objeto Persona (Constructor por Defecto):
+        Persona persona = new Persona("Samuel", "Hernández Santisteban", 21);
+        // Creación de objeto Persona (Constructor del Nombre):
+        Persona persona2 = new Persona("Samuel");
+
+        // Devuelve su propio ToString()
+        System.out.println(persona.toString());
+
+        // Imprimir el Nombre Completo de la primer Persona:
+        System.out.println("Nombre Completo: " + persona.NombreCompleto() + ".");
+
+        // Imprimir solo el Nombre de la segunda Persona:
+        System.out.println("Nombre: " + persona2.nombre() + ".");
+
+        // Imprimir el Número de Personas Creadas:
+        System.out.println("Número de Personas Creadas: " + Persona.get_PersonasCreadas());
+
+        // Llamar al Método: mayorEdad(), evaluar si es mayor o no, e imprimir un mensaje indicándolo:
+        if (persona.mayorEdad()) {
+            System.out.println(persona.nombre + " Es Mayor de edad.");
+        } else {
+            System.out.println(persona.nombre + " Es Menor de edad.");
+
+        }
+
+    }
+}
+
+-- Adaptar el Ejercicio de la Clase Libro a una estructura simplificada con Record:
+-- Como se puede apreciar en el ejercicio se eliminan varios cosas como los métodos getters y setters.
+-- Record crea sus propios Métodos Get automáticamente.
+
+public class Record_Libro {
+
+    public static void main(String[] args) {
+        // Definición de estructura record para "Libro"
+        record Libro(int ISBN, String titulo, int numero_paginas, String autor, boolean prestado) {
+
+            // Creación de Constructor Vacío:
+            public Libro() {
+                this(0, "", 0, "", false);
+            }
+
+            // Creación de un Constructor por Defecto:
+            public Libro(int ISBN, String titulo, int numero_paginas, String autor, boolean prestado) {
+                this.ISBN = ISBN;
+                this.titulo = titulo;
+                this.numero_paginas = numero_paginas;
+                this.autor = autor;
+                this.prestado = prestado;
+            }
+
+  
+            // Metodos Prestar(), Devolver() o Imprimir(). Record no permite modificar valores y asignar "true", por lo que una solución es devolver otra instancia
+            // de objeto con el valor modificado:
+            public Libro prestar() {
+
+                if (this.prestado()) {
+                    System.out.println("El libro " + this.titulo() + " ya se encuentra prestado.");
+                    return this;
+                } else {
+                    System.out.println("Acabas de prestar el libro " + this.titulo());
+                    return new Libro(ISBN, titulo, numero_paginas, autor, true);
+                }
+            }
+
+            public Libro devolver() {
+
+                if (this.prestado()) {
+                    System.out.println("El libro: " + this.titulo + " ya no se encuentra prestado.");
+                    return new Libro(ISBN, titulo, numero_paginas, autor, false);
+                } else {
+                    System.out.println("El libro: " + this.titulo() + " ya se encuentra devuelto.");
+                    return this;
+                }
+            }
+
+            public double imprimir(double coste) {
+                return coste * this.numero_paginas();
+            }
+
+            // Creación de método ToString para personalizar mensajes:
+            @Override
+            public String toString() {
+
+                String mensaje = "El Libro " + this.ISBN() + " con título " + this.titulo() + " y autor " + this.autor() + " tiene " + this.numero_paginas();
+
+                if (this.prestado()) {
+                    mensaje += " páginas y está prestado ";
+
+                } else {
+                    mensaje += " páginas y no está prestado ";
+                }
+                return mensaje;
+            }
+
+            // Comprobación de si los ISBN son iguales:
+            @Override
+            public int hashCode() {
+                int hash = 7;
+                hash = 61 * hash + this.ISBN;
+                return hash;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                if (obj == null) {
+                    return false;
+                }
+                if (getClass() != obj.getClass()) {
+                    return false;
+                }
+                final Libro other = (Libro) obj;
+                return this.ISBN == other.ISBN;
+            }
+        }
+
+        // Creación de objetos para libro:
+        Libro libro1 = new Libro(1, "libro1", 1000, "Manolo", true);
+        Libro libro2 = new Libro(2, "libro1", 1000, "Manolo", true);
+
+        if (libro1.equals(libro2)) {
+            System.out.println("Los libros son iguales, tienen el mismo ISBN");
+        } else {
+            // Comprobación del Método para Prestar el Libro:
+            libro1 = libro1.prestar();
+            // Comprobación del para Devolver el Libro:
+            libro1 = libro1.devolver();
+            // Comprobación del para Imprimir el coste del Libro:
+            System.out.println(libro1.toString() + "su coste es: " + libro1.imprimir(0.01));
+            System.out.println(libro2.toString() + "su coste es: " + libro2.imprimir(0.01));
+
+        }
+
+    }
+}
+

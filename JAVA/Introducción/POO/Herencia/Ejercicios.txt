@@ -1,0 +1,117 @@
+En Java la "Herencia" es una característica de este lenguaje de programación que permite que una Clase Padre 
+transfiera sus funciones y sus atributos a las Clases Hijas. Es bueno para evitar la repetición de código. 
+Ej: Persona -> Policía, Bombero... Animal -> Perro, Gato...
+
+-- Ejemplo: Se han creado 2 archivos, uno contiene la subclase "Empleado" y otro "Gerente"; ambos heredan de "Persona" sus Métodos y Atributos:
+
+-- Archivo 1, "Empleado":
+
+// Esta es una subclase "Empleado" que hereda de la clase Padre "Persona"
+public class Empleado extends Persona {
+
+// A parte de los atributos heredados, se agrega uno adicional:
+    private double salario;
+
+// Creación de Constructor por Defecto junto con atributos del padre:
+    public Empleado(double salario, String nombre, String apellido1, String apellido2, int edad) {
+        // En vez de "this", para los atributos de la clase padre se hace referencia con "super":
+        super(nombre, apellido1, apellido2, edad);
+        this.salario = salario;
+    }
+
+    // Creación de Métodos Getters y Setters para la subclase Empleado:
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    // Creación de ToString() para mostrar los atributos de la clase Persona y la subclase Empleado:
+    @Override
+    public String toString() {
+        return "Nombre: " + super.NombreCompleto() + ", edad: " + super.getEdad() + ", salario: " + this.getSalario();
+    }
+
+}
+
+-- Archivo 2, "Gerente":
+
+// Esta es una subclase "Gerente" que hereda de la clase Padre "Persona"
+public class Gerente extends Persona {
+
+// A parte de los atributos heredados, se agrega uno adicional:
+    private String Departamento;
+
+// Creación de Constructor por Defecto junto con atributos del padre:
+    public Gerente(String Departamento, String nombre, String apellido1, String apellido2, int edad) {
+        // En vez de "this", para los atributos de la clase padre se hace referencia con "super":
+        super(nombre, apellido1, apellido2, edad);
+        this.Departamento = Departamento;
+    }
+    
+// Creación de Métodos Getters y Setters para la subclase Gerente:
+    public String getDepartamento() {
+        return Departamento;
+    }
+
+    public void setDepartamento(String Departamento) {
+        this.Departamento = Departamento;
+    }
+    
+// Creación de ToString() para mostrar los atributos de la clase Persona y la subclase Gerente:
+    @Override
+    public String toString() {
+        return "Nombre: " + super.NombreCompleto() + ", edad: " + super.getEdad() + ", Departamento: " + this.getDepartamento();
+    }  
+}
+
+-- Archivo 3, Salida de la Información.
+
+public class POO {
+
+    public static void main(String[] args) {
+       
+        // Ambos tienen el mismo valor (0). Actúa como un contador universal:
+        System.out.println("Valor para ambos objetos: " + Persona.getPersonasCreadas());
+
+        try {  
+            
+        // Objeto de tipo Dirección que se esta usando como atributo de la clase Persona:
+        Dirección direccion_p1 = new Dirección("Calle Luna", 1, "Almería", "Almería");
+        Dirección direccion_p2 = new Dirección("Calle Sol", 2, "Almería", "Almería");
+        
+        // Objeto de tipo Persona
+        Persona p = new Persona("Samuel", "Hernandez", "Santisteban", 21, direccion_p1);
+        Persona p2 = new Persona("Manuel", "Fernández", "Esteban", 22, direccion_p2);
+        
+        // Objetos de tipo Empleado, que es una subclase de Persona
+        Empleado emp1 = new Empleado(1000, "Samuel", "Hernández", "Santisteban", 21);
+        Gerente ger1 = new Gerente ("Informática", "Manuel", "Fernández", "Esteban", 22);
+        
+        System.out.println("");
+        // Se llaman a los métodos para mostrar el nombre completo de las dos personas:
+        System.out.println("El Nombre Completo es: " + p.NombreCompleto() + ", Puesto: Empleado, Salario: " + emp1.getSalario());
+        System.out.println("Su Dirección es: " + p.getDireccion());
+        System.out.println("");
+        System.out.println("El Nombre Completo es: " + p2.NombreCompleto() + ", Puesto: Gerente, Departamento: " + ger1.getDepartamento());
+        System.out.println("Su Dirección es: " + p2.getDireccion());
+        System.out.println("");
+        
+        if (p.mayorEdad() && p2.mayorEdad()){
+            System.out.println(p.get_Nombre() + " es mayor de edad, tiene: " + p.getEdad());
+            System.out.println(p2.get_Nombre() + " es mayor de edad, tiene: " + p2.getEdad());
+        } else {
+            System.out.println(p.get_Nombre() + " es menor de edad, tiene: " + p.getEdad());
+            System.out.println(p2.get_Nombre() + " es menor de edad, tiene: " + p.getEdad());
+        }
+       
+        } catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+       
+        }
+        
+    }
+}
+
