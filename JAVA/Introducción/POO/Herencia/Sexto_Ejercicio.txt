@@ -1,0 +1,196 @@
+-- primer archivo clase padre Vehiculo
+
+public class vehiculo {
+
+    // Definición de atributos para la clase padre "vehículo":
+    private String Marca;
+    private String Modelo;
+
+    // Creación de Constructor por Defecto:
+    public vehiculo(String Marca, String Modelo) {
+        this.Marca = Marca;
+        this.Modelo = Modelo;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public String getMarca() {
+        return Marca;
+    }
+
+    public void setMarca(String Marca) {
+        this.Marca = Marca;
+    }
+
+    public String getModelo() {
+        return Modelo;
+    }
+
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
+    }
+
+    // Creación de Método ToString() para imprimir la información de la clase "vehículo":
+    @Override
+    public String toString() {
+        return "La Marca del vehículo es: " + this.getMarca() + ", y el Modelo: " + this.getModelo();
+    }
+
+} // Cierre de la clase "vehículo".
+
+-- segundo archivo subclase Moto
+
+
+public class moto extends vehiculo {
+
+    // Definición de atributos para la subclase "coche" + atributos heredados de "vehículo":
+    private boolean sidecar;
+
+    // Creación de Constructor por Defecto:
+    public moto(boolean sidecar, String Marca, String Modelo) {
+        super(Marca, Modelo);
+        this.sidecar = sidecar;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public boolean isSidecar() {
+        return sidecar;
+    }
+
+    public void setSidecar(boolean sidecar) {
+        this.sidecar = sidecar;
+    }
+
+    // Creación de Método ToString() para imprimir la información de la clase padre "vehículo" + subclase "moto":
+    @Override
+    public String toString() {
+        String mensaje = super.toString() + ", sidecar: ";
+        
+        if (this.isSidecar()) {
+            mensaje += " Incorporado.";
+        } else {
+            mensaje += " No Incorporado.";
+        }
+        return mensaje;
+    }
+
+} // Cierre de la clase "moto".
+
+
+-- tercer archivo subclase coche
+
+public class coche extends vehiculo {
+
+    // Definición de atributos para la subclase "coche" + atributos heredados de "vehículo":
+    private int numero_puertas;
+
+    // Creación de Constructor por Defecto:
+    public coche(int numero_puertas, String Marca, String Modelo) {
+
+        if (numero_puertas < 2) {
+            throw new IllegalArgumentException("El número mínimo de puertas debe de ser dos.");
+        }
+        super(Marca, Modelo);
+        this.numero_puertas = numero_puertas;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public int getNumero_puertas() {
+        return numero_puertas;
+    }
+
+    public void setNumero_puertas(int numero_puertas) {
+        if (numero_puertas < 2) {
+            throw new IllegalArgumentException("El número mínimo de puertas debe de ser dos.");
+        }
+        this.numero_puertas = numero_puertas;
+    }
+
+    // Creación de Método ToString() para imprimir la información de la clase padre "vehículo" + subclase "coche":
+    @Override
+    public String toString() {
+        return super.toString() + ", Número de puertas: " + this.numero_puertas;
+    }
+
+} // Cierre de la subclase "coche".
+
+
+-- cuarto archivo subclase coche deportivo
+
+public class coche_deportivo extends coche {
+
+    // Definición de atributos para la subclase "coche_deportivo" + atributos heredados de "coche" (y "vehiculo"):
+    private boolean descapotable;
+
+    // Creación de Constructor por Defecto:
+    public coche_deportivo(boolean descapotable, int numero_puertas, String Marca, String Modelo) {
+        super(numero_puertas, Marca, Modelo);
+        this.descapotable = descapotable;
+    }
+
+    // Encapsulación de todos los Atributos (Getters y Setters):
+    public boolean isDescapotable() {
+        return descapotable;
+    }
+
+    public void setDescapotable(boolean descapotable) {
+        this.descapotable = descapotable;
+    }
+
+    // Creación de Método ToString() e imprimir info de "vehiculo", "coche" y subclase "coche_deportivo":
+    @Override
+    public String toString() {
+
+        String mensaje = super.toString();
+
+        if (this.isDescapotable()) {
+            mensaje += ", Descapotable: SI.";
+        } else {
+            mensaje += ", Descapotable: NO.";
+        }
+
+        return mensaje;
+    }
+
+} // Cierre de la subclase coche_deportivo
+
+
+-- quinto archivo, salida de la información
+
+public class Objetos {
+
+    public static void main(String[] args) {
+
+        try {
+        
+         // Objetos de la subclase: "moto".
+         moto mot1 = new moto(true, "A", "A123D");
+         System.out.println(mot1.toString());
+        
+         // Objetos de la subclase: "coche".
+         coche coch1 = new coche(2, "B", "A123E");
+         System.out.println(coch1.toString());
+        
+         // Objetos de la subclase: "coche deportivo".
+         coche_deportivo coch_dep1 = new coche_deportivo(true, 2, "C", "A123F");
+         System.out.println(coch_dep1.toString());
+         
+ 
+        } catch (IllegalArgumentException e)
+        {System.out.println(e.getMessage());};
+    }
+} // Cierre del Main.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
