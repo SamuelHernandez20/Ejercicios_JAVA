@@ -1,0 +1,27 @@
+- Las interfaces permiten definir comportamientos que las clases deben implementar. 
+
+- Esto fomenta la reutilización de código, ya que múltiples clases pueden implementar una misma interfaz y proporcionar 
+diferentes implementaciones para un mismo conjunto de métodos. La característica fundamental es que permite que dos clases
+aparentemente no relacionadas, se terminan asociando mediante una 'relación horizontal'.
+
+- Es similar a las clases abstractas.
+
+Ejemplo 1, se crea una interfaz para declarar 2 Métodos. El primero calcula el área de un círculo,
+y el segundo el perímetro de un cuadrado.
+
+############################################################
+
+public interface Calculable {
+
+    // Declaración de los Métodos:
+    public double calcularea();
+    public double calculaperimetro();
+
+} // Cierre de interfaz.
+
+###########################################################
+
+
+
+
+

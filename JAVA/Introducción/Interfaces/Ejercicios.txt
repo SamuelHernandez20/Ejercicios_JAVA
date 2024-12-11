@@ -1,0 +1,105 @@
+-- Archivo 1; Interfaz y conjunto de Métodos:
+
+public interface Calculable {
+
+    // Declaración de los Métodos:
+    public double calcularea();
+    public double calculaperimetro();
+
+} // Cierre de interfaz.
+
+
+-- Archivo 2; Clase "power" donde implemento un Método Auxilia para calcular la potencia de un número:
+
+public class power {
+
+    // Creación de Método para calcular la potencia de un número:
+    public static double getSquare(double number) {
+		return number * number;
+	}
+
+} // Cierre de la clase.
+
+-- Archivo 3; Clase circulo:
+
+public class circulo implements Calculable {
+
+    private double radio;
+
+    public circulo(double radio) {
+        this.radio = radio;
+    }
+
+    public double getRadio() {
+        return radio;
+    }
+
+    public void setRadio(double radio) {
+        this.radio = radio;
+    }
+
+    // Se implementan los Métodos declarados en la interfaz Calculable:
+    @Override
+    public double calcularea() {
+        return Math.PI * power.getSquare(this.getRadio());
+    }
+
+    @Override
+    public double calculaperimetro() {
+       return Math.PI * 2 * this.getRadio();
+    }
+
+} // Cierre de la clase.
+
+
+-- Archivo 4; Clase cuadrado:
+
+public class cuadrado implements Calculable {
+
+    private double lado;
+
+    public cuadrado(double lado) {
+        this.lado = lado;
+    }
+
+    public double getLado() {
+        return lado;
+    }
+
+    public void setLado(double lado) {
+        this.lado = lado;
+    }
+
+    // Se implementan los Métodos declarados en la interfaz Calculable:
+    @Override
+    public double calcularea() {
+        return this.getLado() * this.getLado();
+    }
+
+    @Override
+    public double calculaperimetro() {
+        return this.lado * 4;
+    }
+
+} // Cierre de la clase.
+
+-- Archivo 5; Creación de los Objetos y Salida de la Información:
+public class POO {
+
+    public static void main(String[] args) {
+
+        // Creación de objetos para las figuras geométricas:
+        circulo circulo1 = new circulo(5.4);
+        cuadrado cuadrado1 = new cuadrado(5.9);
+
+        // Llamada a los Métodos correspondientes de la interfaz "Calculable":
+        System.out.println("");
+        System.out.println("- El área del circulo: " + circulo1.calcularea() + ".");
+        System.out.println("- El perímetro del círculo es: " + circulo1.calculaperimetro() + ".");
+        System.out.println("");
+        System.out.println("- El área del cuadrado es: " + cuadrado1.calcularea() + ".");
+        System.out.println("- El perímetro del cuadrado es: " + cuadrado1.calculaperimetro() + ".");
+
+ } // Cierre de la Clase "Main".
+
+} // Cierre de la Clase "POO".
