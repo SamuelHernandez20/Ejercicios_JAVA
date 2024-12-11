@@ -1,0 +1,112 @@
+A veces cuando se crea una clase padre, como en el ejemplo de "Persona"
+y no se llegan a instanciar realmente estas clases, porque ya lo están haciendo las
+subclases ("Empleado", "Gerente"...) la Abstracción en Java es útil para dejar lo mínimo necesario.
+Por esto es útil la creación de "clases abstractas" (no instanciable).
+
+Ejemplo:
+
+// Se le agrega a la clase padre "abstract":
+
+public abstract class Persona {
+
+    // Definir Atributos:
+    // Definición de Atributo Estático:
+    private static int personasCreadas = 0;
+
+    // Usar atributo que es un objeto de la clase "Dirección":
+    private Dirección direccion;
+
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+
+}
+
+Esto es útil para declarar "Métodos Abstractos". 
+¿Qué es un Método Abstracto?
+Un Método Abstracto es un método que no tiene implementación. 
+Es decir, solo tiene una declaración, por lo que conoce el nombre, el tipo de devolución y las variables que aceptará. 
+Aquí hay un ejemplo de un Método Abstracto Básico:
+
+##################################################
+## public abstract int example(int a1, int a2); ##
+##################################################
+
+- Los métodos abstractos de Java no tienen implementación. 
+  Es decir, nunca deben ir seguidos de llaves y un cuerpo que indique cómo se utilizará el método. Solo se termina con un punto y coma.
+
+- Si crea un método abstracto, solo se puede poner en una clase abstracta. Es decir, no puede tener una clase concreta que tenga un método abstracto dentro de ella.
+Como nota al margen, si tiene una clase abstracta, puede contener constructores. Sin embargo, no tiene que tener un método abstracto.
+
+- Cuando una clase concreta extiende una clase abstracta, también debe implementar todos los métodos abstractos de la clase principal 
+  o no puede ser concreta y debe declararse abstracta.
+
+-------------
+  Ejemplo 1: 
+-------------
+
+- Clase Abstracta: "Shape", con la declaración de un Método Abstracto llamado: area().
+
+##################################################
+
+ abstract class Shape {
+  		String shapeName = " ";
+  		Shape(String name) {
+    			this.shapeName = name;
+  		}
+
+ abstract double area();
+  		abstract double perimeter();
+ }
+
+##################################################
+
+- Subclase: "Quadrilateral" e implementacion del Método Abstracto.
+
+################################################################################
+ class Quadrilateral extends Shape
+ {
+     double length, width;
+
+     Quadrilateral(double l, double w, String name)
+     {
+         super(name);
+         this.length = l;
+         this.width = w;
+     }
+
+     @Override
+     public double perimeter()
+     {
+         return ((2*length)+(2*width));
+     }
+ 
+     @Override
+     public double area()
+     {
+         return (length*width);
+     } 
+ }
+
+####################################################################################
+
+- Llamada desde el Archivo Principal:
+
+####################################################################################
+
+ class Main
+ {
+     public static void main (String[] args)
+     {
+
+        
+         Shape rectangle = new Quadrilateral(3,4, "Rectangle");
+         System.out.println("Area of rectangle is " + rectangle.area());
+         System.out.println("Perimeter of rectangle is " + rectangle.perimeter());
+
+     }
+ }
+
+######################################################################################
+

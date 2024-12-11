@@ -1,0 +1,303 @@
+-- Primer Archivo, Clase Abstracta Padre "Aeropuerto":
+
+public abstract class Aeropuerto {
+
+    // Definición de Atributo Estático para generar el ID Autoincremental
+    static int generador = 1;
+
+    // Definición de Atributos:
+    private int id;
+    private String Nombre;
+    private int año_inauguracion;
+    private int capacidad;
+
+    // Creación del Constructor Vacío:
+    public Aeropuerto() {
+        this.id = 0;
+        this.Nombre = "";
+        this.año_inauguracion = 0;
+        this.capacidad = 0;
+    }
+
+    // Creación de Constructor con todos los atributos menos el identificador:
+    public Aeropuerto(String Nombre, int año_inauguracion, int capacidad) {
+
+        // EEvaluar que la capacidad del aeropuerto contenga un valor mayor a 0:
+        if (this.capacidad < 0) {
+            throw new IllegalArgumentException("La Capacidad del Aeropuerto debe de ser mayor a 0.");
+        }
+
+        // Convertir el "año_inauguracion" a String para evaluar que tenga una longitud mínima: 
+        String cadena_año_inauguracion = String.valueOf(año_inauguracion);
+
+        if (cadena_año_inauguracion.length() < 4) {
+            throw new IllegalArgumentException("El Año de Inauguración debe de tener una longitud mínima de 4 cifras.");
+        } else if (año_inauguracion < 1909) {
+            throw new IllegalArgumentException("No hay registros de ningún Aeropuerto tan antiguo. Introduzca un año posterior a 1909.");
+        } else {
+            System.out.println("Registrando el Aeropuerto en la Base de Datos...");
+        }
+
+        this.Nombre = Nombre;
+        this.año_inauguracion = año_inauguracion;
+        this.capacidad = capacidad;
+
+        // Incrementar el identificador:
+        this.id = generador++;
+    }
+
+    // Encapsulamiento de todo sus Atributos:
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public int getAño_inauguracion() {
+        return año_inauguracion;
+    }
+
+    public void setAño_inauguracion(int año_inauguracion) {
+
+        if (año_inauguracion < 1909) {
+            throw new IllegalArgumentException("No hay registros de ningún Aeropuerto tan antiguo. Introduzca un año posterior a 1909.");
+        } else {
+            System.out.println("Registrando el Aeropuerto en la Base de Datos...");
+        }
+        this.año_inauguracion = año_inauguracion;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+
+        if (this.capacidad < 0) {
+            throw new IllegalArgumentException("La Capacidad del Aeropuerto debe de ser mayor a 0.");
+        }
+        this.capacidad = capacidad;
+    }
+
+    // Declaración del Método Abstracto: GananciasTotales().
+    public abstract void GananciasTotales(int cantidad);
+    
+    // Obtener la Información el Método ToString():
+
+    @Override
+    public String toString() {
+        return "ID del Aeropuerto: " + this.getId() + ", Nombre: " + this.getNombre() + ", Año de Inauguración: " + this.año_inauguracion
+                + ", capacidad: " + this.getCapacidad();
+    }
+    
+} // Cierre de la clase abstracta "Aeropuerto".
+
+
+-- Segundo Archivo, Subclase "Aeropuerto_Público":
+
+
+public class Aeropuerto_Público extends Aeropuerto {
+
+    // Definición de Atributos:
+    private int financiacion;
+    private int num_empleados_discapacitados;
+
+    // Creación del Constructor Vacío:
+    public Aeropuerto_Público() {
+        super();
+        this.financiacion = 0;
+        this.num_empleados_discapacitados = 0;
+    }
+
+    // Creación de Constructor por Defecto:
+    public Aeropuerto_Público(int financiacion, int num_empleados_discapacitados, String Nombre, int año_inauguracion, int capacidad) {
+
+        // Evaluar que la "financiación" no contenga números negativos:
+        if (financiacion < 0) {
+            throw new IllegalArgumentException("La Financiación del Aerpuerto no puede contener valores negativos.");
+        }
+
+        // Evaluar que la "num_empleados_discapacitados" no contenga números negativos:
+        if (num_empleados_discapacitados < 0) {
+            throw new IllegalArgumentException("El número de empleados discapacitados no puede contener valores negativos.");
+        }
+
+        super(Nombre, año_inauguracion, capacidad);
+        this.financiacion = financiacion;
+        this.num_empleados_discapacitados = num_empleados_discapacitados;
+    }
+
+    // Encapsulamiento de todo sus Atributos:
+    public int getFinanciacion() {
+        return financiacion;
+    }
+
+    public void setFinanciacion(int financiacion) {
+        if (financiacion < 0) {
+            throw new IllegalArgumentException("La Financiación del Aerpuerto no puede contener valores negativos.");
+        }
+        this.financiacion = financiacion;
+    }
+
+    public int getNum_empleados_discapacitados() {
+        return num_empleados_discapacitados;
+    }
+
+    public void setNum_empleados_discapacitados(int num_empleados_discapacitados) {
+        if (num_empleados_discapacitados < 0) {
+            throw new IllegalArgumentException("El número de empleados discapacitados no puede contener valores negativos.");
+        }
+        this.num_empleados_discapacitados = num_empleados_discapacitados;
+    }
+
+    /* Operaciones a Implementar: 
+       
+    - GananciasTotales() -> Dada una cantidad, se le sumará la "financiación" y 1000 euros
+                            por cada uno de los trabajadores discapacitados. 
+    - Razonamiento Hipotético:
+        Cantidad -> 270.000
+        Financiacion -> 100.000
+        Trabajdores Discapacitados = 150 (1000 euros por cada uno -> 150.000)
+
+    - Operación:
+        270.000 + 100.000 + 150.000 = 520.000.
+
+    - Resultado:
+        520.000 de Ganancias totales.
+     */
+    
+    @Override
+    public void GananciasTotales(int cantidad) {
+        double ganancia_total = cantidad + this.getFinanciacion() + (this.getNum_empleados_discapacitados() * 1000);
+        if (cantidad < 0) {
+            throw new IllegalArgumentException("La Cantidad debe de ser un valor mayor a 0.");
+        } else {
+            System.out.println("La ganancia total es: " + ganancia_total);
+        }
+
+    } // Cierre del Método "GananciasTotales()".
+    
+    // Obtener la Información el Método ToString():
+
+    @Override
+    public String toString() {
+        return "- Aeropuerto Público. " + super.toString() + ", Financiación: " + this.getFinanciacion() + ", Empleados Discapacitados: " 
+                + this.getNum_empleados_discapacitados();
+    }
+    
+} // Cierre de la clase "Aeropuerto_Público".
+
+
+-- Tercer Archivo, Subclase "Aeropuerto_Privado":
+
+public class Aeropuerto_Privado extends Aeropuerto {
+
+    // Definición de Atributos:
+    private int numero_socios;
+
+    // Creación del Constructor Vacío:
+    public Aeropuerto_Privado() {
+        super();
+        this.numero_socios = 0;
+    }
+
+    // Creación de Constructor por Defecto:
+    public Aeropuerto_Privado(int numero_socios, String Nombre, int año_inauguracion, int capacidad) {
+        // Evaluar que el número de socios no contengan un valor negativo:
+        if (numero_socios < 0) {
+            throw new IllegalArgumentException("El número de socios debe de ser un valor mayor a 0.");
+        }
+        super(Nombre, año_inauguracion, capacidad);
+        this.numero_socios = numero_socios;
+    }
+
+    // Encapsulamiento de todos los atributos:
+    public int getNumero_socios() {
+        return numero_socios;
+    }
+
+    public void setNumero_socios(int numero_socios) {
+        if (numero_socios < 0) {
+            throw new IllegalArgumentException("El número de socios debe de ser un valor mayor a 0.");
+        }
+        this.numero_socios = numero_socios;
+    }
+
+    /* Operaciones a Implementar: 
+       
+    - GananciasTotales() -> Dada una cantidad, se dividirá entre "numero_socios". 
+    
+    - Razonamiento Hipotético:
+        Cantidad -> 270.000
+        Número de socios -> 100
+       
+    - Operación:
+        270.000 / 100 = 2700.
+
+    - Resultado:
+        2700 de Ganancias totales.
+     */
+    @Override
+    public void GananciasTotales(int cantidad) {
+        double ganancia_total = cantidad/this.getNumero_socios();
+        if (cantidad < 0) {
+            throw new IllegalArgumentException("La Cantidad debe de ser un valor mayor a 0 " +
+                                               "para calcular el reparto entre los socios.");
+        } else {
+            System.out.println("La ganancia total es: " + ganancia_total);
+        }
+        
+    } // Cierre del Método GananciasTotales().
+    
+    // Obtener la Información el Método ToString():
+
+    @Override
+    public String toString() {
+        return "- Aeropuerto Privado. " + super.toString() + ", Número de socios: " + this.getNumero_socios();
+    }
+    
+} // Cierre de la subclase "Aeropuerto_Privado".
+
+-- Cuarto Archivo, Creación de objetos para las subclases y salida de la información:
+
+
+public class App {
+
+    public static void main(String[] args) {
+
+        try {
+
+            // Creación de Objeto para la subclase: "Aeropuerto_Público".
+            Aeropuerto_Público apub = new Aeropuerto_Público(100, 150, "AeropuertoPúblico1", 2003, 270);
+
+            // Creación de Objeto para la subclase; "Aeropuerto_Privado".
+            Aeropuerto_Privado apri = new Aeropuerto_Privado(50, "AeropuertoPrivado1", 2004, 500);
+
+            // Salida de la Información:
+            System.out.println("");
+            System.out.println(apub.toString());
+            // Llamada al Método GananciasTotales() para el Aeropuerto Público:
+            apub.GananciasTotales(100);
+
+            System.out.println("");
+            System.out.println(apri.toString());
+            // Llamada al Método GananciasTotales() para el Aeropuerto Público:
+            apri.GananciasTotales(10000);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        };
+
+    } // Cierre del "Main". 
+
+} // Cierre de la clase "App".
