@@ -1,0 +1,32 @@
+En Java se puede crear un Array de Objetos, por ejemplo: "Persona []" el cuál guarde
+objetos de "Empleado", "Gerente"... Y luego con un bucle foreach recorrerlo y mostrar la info.
+
+- Ejemplo: Creo varios objetos Empleado y Gerente y los asigno a un Array "Persona []":
+
+###########################################################################################
+
+   Persona[] personas = {
+
+        Empleado emp1 = new Empleado(1000, "Samuel", "Hernández", "Santisteban", 21);
+        Gerente ger1 = new Gerente ("Informática", "Manuel", "Fernández", "Esteban", 22);
+        Empleado emp2 = new Empleado(1500, "David", "Ibañez", "García", 26);
+        Gerente ger2 = new Gerente ("Recursos Humanos", "Pedro", "Martín", "Peréz", 35);
+ }
+   
+  for (Persona p :personas) {
+      System.out.println(p);
+  }
+
+  ( Desde la llamada de los elementos del Array Persona no se puede acceder a los 
+    Métodos de "Empleado" o "Gerente". 
+    La forma de solucionar esto sería hacer un casting y convertirlo al tipo Objeto.
+    EJ; Empleado e = (Empleado) personas[0];  <-- De esta forma los Métodos si son accesibles. ).
+
+###########################################################################################
+
+Estoy tambien se puede aplicar para las Interfaces. Es decir, es posible crear un Array de Interfaces
+para aquellas clases que tienen una misma Interfaz en común. Para Acceder a los Métodos que se declaren
+en dicha Interfaz/Interfaces habrá que aplicar un solución similar a la que se abordó anteriormente.
+
+
+

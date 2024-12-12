@@ -1,0 +1,168 @@
+-- Archivo 1, Creación de Interfaz 'Prestable' con los Métodos 'prestar()' y 'devolver()':
+
+public interface Prestable {
+
+    public void prestar();
+    public void devolver();
+
+}
+
+-- Archivo 2, clase 'videojuego':
+
+public class videojuego implements Prestable {
+
+    private String Nombre;
+    private double Precio;
+    private boolean Prestado;
+    private int Veces_prestado;
+
+    public videojuego(String nombre, double precio) {
+        
+        if (precio <= 0) {
+            throw new IllegalArgumentException("El Precio debe tener un valor superior a 0.");
+            
+        }
+        Nombre = nombre;
+        Precio = precio;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public double getPrecio() {
+        return Precio;
+    }
+
+    public void setPrecio(double Precio) {
+        if (Precio <= 0) {
+            throw new IllegalArgumentException("El Precio debe tener un valor superior a 0.");
+        }
+        this.Precio = Precio;
+    }
+
+    @Override
+    public void prestar() {
+        if (!Prestado) {
+            this.Prestado = true;
+            this.Veces_prestado++;
+            System.out.println("Prestando el videojuego... Tome: " + this.Nombre + ".");
+        } else {
+            System.out.println("El videojuego: " + this.Nombre + ", no se puede volver a prestar.");
+        }
+    }
+
+    @Override
+    public void devolver() {
+        if (Prestado) {
+            this.Prestado = false;
+            System.out.println("Devolviendo el videojuego... " + this.Nombre + ".");
+        } else {
+            System.out.println("El videojuego: " + this.Nombre + ", no se puede devolver otra vez.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nombre: ").append(this.Nombre);
+        sb.append(", Precio: ").append(this.Precio);
+        sb.append(", Veces Prestado: ").append(this.Veces_prestado);
+        return sb.toString();
+    }
+
+}
+
+-- Archivo 3, clase 'prestamo':
+
+public class prestamo implements Prestable {
+
+    private double Cantidad;
+    private double Adeudo;
+    private String Titular;
+
+    public prestamo(double cantidad, String titular) {
+
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La Cantidad del Préstamo debe tener un valor superior a 0.");
+        }
+        this.Cantidad = cantidad;
+        this.Titular = titular;
+    }
+
+    public double getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(double Cantidad) {
+
+        if (Cantidad <= 0) {
+            throw new IllegalArgumentException("La Cantidad del Préstamo debe tener un valor superior a 0.");
+        }
+        this.Cantidad = Cantidad;
+    }
+
+    public String getTitular() {
+        return Titular;
+    }
+
+    public void setTitular(String Titular) {
+        this.Titular = Titular;
+    }
+
+    @Override
+    public void prestar() {
+
+        final double INCREASE_5_PERCENT = this.Cantidad + (this.Cantidad * 0.05);
+        this.Adeudo += INCREASE_5_PERCENT;
+
+        System.out.println("Cantidad Prestada: " + this.Cantidad + " €, Titular: " + this.Titular);
+        System.out.println("Adeudo + %5 de Interés = " + this.Adeudo);
+
+    }
+
+    @Override
+    public void devolver() {
+
+        if (this.Adeudo < this.Cantidad) {
+            this.Adeudo = 0;
+        } else {
+            this.Adeudo -= this.Cantidad;
+            System.out.println("Cantidad Devuelta: " + this.Cantidad + " €, Titular: " + this.Titular);
+            System.out.println("Adeudo Reducido = " + this.Adeudo);
+        }
+
+    }
+
+}
+
+-- Archivo 4, creación de objetos y salida de la información:
+
+public class App {
+
+    public static void main(String[] args) {
+        try {
+            videojuego v1 = new videojuego("Dark Soul 3", 25.39);
+            prestamo p1 = new prestamo(30.00, "Samuel");
+
+            // Métodos prestar() y devolver() con las operaciones de la clase "videojuego":
+            v1.prestar();
+            v1.devolver();
+            System.out.println("");
+
+            // Métodos prestar() y devolver() con las operaciones de la clase "prestamo":
+            p1.prestar();
+            System.out.println("");
+            p1.devolver();
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+}
